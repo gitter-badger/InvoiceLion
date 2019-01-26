@@ -9,7 +9,7 @@ if (isset($_POST['username'])) {
         $error = "Username is already taken";
     } else {
         $error = "User can not be registered";
-        $userId = Auth::register($username, $password);
+        $userId = NoPassAuth::register($username);
         if ($userId) {
             $tenantId = DB::insert('INSERT INTO `tenants` (`name`, `email`, `invoice_email`) VALUES (?, ?, ?)', $username, $username, $username); // does not need tenant_id check
             if ($tenantId) {
@@ -17,6 +17,7 @@ if (isset($_POST['username'])) {
                 if ($rowsAffected) {
                     if (!Cache::get('AuthForgotten_mailto_' . $username)) {
                         Cache::set('AuthForgotten_mailto_' . $username, '1', NoPassAuth::$tokenValidity);
+                        $token = NoPassAuth::token($username);
                         mail($username, 'Verify email ' . Router::getBaseUrl(), 'Click here: ' . Router::getBaseUrl() . "auth/reset/$token");
                     }
                     Router::redirect("auth/sent");
