@@ -4,7 +4,6 @@
 <table class="table">
   <thead>
     <tr>
-      <th class="day">Day</th>
       <th class="date <?php if($order=='date') e('selected'); ?>" order="/deliveries/date/desc">Date</th>
       <th class="name <?php if($order=='name') e('selected'); ?>" order="/deliveries/name/asc">Name</th>
       <th class="text <?php if($order=='customer_id') e('selected'); ?>" order="/deliveries/customer_id/asc">Customer</th>
@@ -14,7 +13,6 @@
   <tbody>
     <?php foreach ($data as $row): ?>
     <tr class="hover" onclick="window.location.href='deliveries/view/<?php e($row['deliveries']['id']);?>';">
-      <td class="day"><span><?php e(date('D', strtotime($row['deliveries']['date'])));?></span></td>
       <td class="date"><span><?php e($row['deliveries']['date']);?></span></td>
       <td class="name"><span><?php e($row['deliveries']['name']);?></span></td>
       <td class="text"><span><?php if(isset($row['deliveries']['customer_id'])) { ?><a href="projects/view/<?php e($row['deliveries']['customer_id']); ?>"><?php e($customers[$row['deliveries']['customer_id']]);?></a><?php } ?></span></td>

@@ -7,12 +7,12 @@
 <br />
 
 <div>
-    <!--<dl>
+    <dl>
         <dt>Time tracking</dt>
         <dd>        
-            Yes
+            <?php if($data['tenants']['hours_active']) e('yes'); else e('no'); ?>
         </dd>
-      </dl>-->
+    </dl>
     <dl>
         <dt>Company name</dt>
         <dd><?php e($data['tenants']['name']?:'-');?></dd>
