@@ -1,1 +1,1 @@
-# InvoiceLion
+# ![logo](/web/img/invoicelion.png) InvoiceLion
