@@ -1,3 +1,3 @@
-<img src="./web/img/invoicelion.png" alt="logo" width="150" />
 
-# InvoiceLion
+
+# <img src="./web/img/invoicelion_icon.png" alt="logo" height="80" /> InvoiceLion
