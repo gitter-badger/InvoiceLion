@@ -1,0 +1,63 @@
+<div class="page-header">
+	<h2><a href="/">Home</a> / <a href="deliveries">deliveries</a></h2>
+  	<h1>Edit deliveries</h1>
+</div>
+<?php if (isset($error)): ?><div class="alert alert-danger"><button type="button" class="close">x</button><div><?php e($error); ?></div></div><?php endif; ?>
+<form method="post">
+	<div class="form-group <?php e(isset($errors['deliveries[project_id]'])?'has-error':''); ?>">
+		<label class="control-label" for="deliveries[project_id]">Project</label>
+		<select class="form-control" name="deliveries[project_id]" id="deliveries[project_id]" onchange="document.getElementById('deliveries[customer_id]').value = this.options[this.selectedIndex].getAttribute('customer-value');">
+			<option value=""<?php e(''==$data['deliveries']['project_id']?' selected="selected"':''); ?>></option>
+			<?php foreach ($projects as $project): ?>
+			<option value="<?php e($project['projects']['id']); ?>" customer-value="<?php e($project['projects']['customer_id']); ?>"<?php e($project['projects']['id']==$data['deliveries']['project_id']?' selected="selected"':''); ?>><?php e($project['projects']['name']); ?></option>
+			<?php endforeach; ?>
+		</select>
+		<span class="help-block"><?php if (isset($errors['deliveries[project_id]'])) e($errors['deliveries[project_id]']); ?></span>
+	</div>
+
+	<div class="form-group <?php e(isset($errors['deliveries[customer_id]'])?'has-error':''); ?>">
+		<label class="control-label" for="deliveries[customer_id]">Customer</label>
+		<select class="form-control" name="deliveries[customer_id]" id="deliveries[customer_id]">
+			<option value=""<?php e(''==$data['deliveries']['customer_id']?' selected="selected"':''); ?>></option>
+			<?php foreach ($customers as $key => $value): ?>
+			<option value="<?php e($key); ?>"<?php e($key==$data['deliveries']['customer_id']?' selected="selected"':''); ?>><?php e($value); ?></option>
+			<?php endforeach; ?>
+		</select>
+		<span class="help-block"><?php if (isset($errors['deliveries[customer_id]'])) e($errors['deliveries[customer_id]']); ?></span>
+	</div>
+
+	<div class="form-group <?php e(isset($errors['deliveries[date]'])?'has-error':''); ?>">
+		<label class="control-label" for="deliveries[date]">Date</label>
+		<input class="form-control" name="deliveries[date]" type="date" value="<?php e($data['deliveries']['date']); ?>" id="deliveries[date]" />
+		<span class="help-block"><?php if (isset($errors['deliveries[date]'])) e($errors['deliveries[date]']); ?></span>
+	</div>
+
+	<div class="form-group <?php e(isset($errors['deliveries[subtotal]'])?'has-error':''); ?>">
+		<label class="control-label" for="deliveries[subtotal]">Subtotal</label>
+		<input class="form-control" name="deliveries[subtotal]" type="number" step="0.01" value="<?php e($data['deliveries']['subtotal']); ?>" id="deliveries[subtotal]" />
+		<span class="help-block"><?php if (isset($errors['deliveries[subtotal]'])) e($errors['deliveries[subtotal]']); ?></span>
+	</div>
+
+	<div class="form-group <?php e(isset($errors['deliveries[vat_percentage]'])?'has-error':''); ?>">
+		<label class="control-label" for="deliveries[vat_percentage]">VAT percentage</label>
+		<input class="form-control" name="deliveries[vat_percentage]" type="number" step="0.01" value="<?php e($data['deliveries']['vat_percentage']); ?>" id="deliveries[vat_percentage]" />
+		<span class="help-block"><?php if (isset($errors['deliveries[vat_percentage]'])) e($errors['deliveries[vat_percentage]']); ?></span>
+	</div>
+
+	<div class="form-group <?php e(isset($errors['deliveries[name]'])?'has-error':''); ?>">
+		<label class="control-label" for="deliveries[name]">Name</label>
+		<input class="form-control" name="deliveries[name]" type="text" value="<?php e($data['deliveries']['name']); ?>" id="deliveries[name]" />
+		<span class="help-block"><?php if (isset($errors['deliveries[name]'])) e($errors['deliveries[name]']); ?></span>
+	</div>
+
+	<div class="form-group <?php e(isset($errors['deliveries[comment]'])?'has-error':''); ?>">
+		<label class="control-label" for="deliveries[comment]">Comment</label>
+		<textarea id="deliveries[comment]" class="form-control" name="deliveries[comment]"><?php e($data['deliveries']['comment']); ?></textarea>
+		<span class="help-block"><?php if (isset($errors['deliveries[comment]'])) e($errors['deliveries[comment]']); ?></span>
+	</div>
+
+	<div class="form-group">
+		<button class="btn btn-primary" type="submit">Save</button>
+	</div>
+	<?php Session::getCsrfInput(); ?>
+</form> 

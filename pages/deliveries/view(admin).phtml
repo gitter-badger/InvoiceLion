@@ -1,0 +1,52 @@
+<div class="page-header">
+  <h2><a href="/">Home</a> / <a href="deliveries">deliveries</a></h2>
+  <h1><?php $data['deliveries']['name'] ? e($data['deliveries']['name']) : e('Untitled');?></h1>
+</div>
+<div>
+	<dl>
+		<dt>Project</dt>
+		<dd>
+		  <?php if(isset($projects[$data['deliveries']['project_id']])) {?>
+			<a href="/projects/view/<?php e($data['deliveries']['project_id']); ?>"><?php e($projects[$data['deliveries']['project_id']]); ?></a>
+		  <?php } else { ?>
+			<?php e('-'); ?>
+		  <?php } ?>
+		</dd>
+  </dl>
+	<dl>
+		<dt>Customer</dt>
+		<dd>
+		  <?php if(isset($customers[$data['deliveries']['customer_id']])) {?>
+			<a href="/customers/view/<?php e($data['deliveries']['customer_id']); ?>"><?php e($customers[$data['deliveries']['customer_id']]); ?></a>
+		  <?php } else { ?>
+			<?php e('-'); ?>
+		  <?php } ?>
+		</dd>
+  </dl>
+
+	<dl>
+		<dt>Date</dt>
+  	<dd><?php e($data['deliveries']['date']);?></dd>
+  </dl>
+
+	<dl>
+		<dt>Subtotal (euro)</dt>
+  	<dd><?php $data['deliveries']['subtotal'] ? e($data['deliveries']['subtotal']) : e('-'); ?></dd>
+  </dl>
+
+	<dl>
+		<dt>VAT percentage</dt>
+  	<dd><?php $data['deliveries']['vat_percentage'] ? e($data['deliveries']['vat_percentage']) : e('-'); ?></dd>
+  </dl>
+	
+	<?php if($data['deliveries']['comment']) { ?>
+		<dl>
+			<dt>Text</dt>
+			<dd><?php e($data['deliveries']['comment']);?></dd>
+		</dl>
+	<?php } ?>
+</div>
+<p>
+	<a class="btn btn-danger pull-right" href="deliveries/delete/<?php e($id); ?>">Delete</a>
+	<a class="btn btn-primary" href="deliveries/edit/<?php e($id); ?>">Edit</a>
+</p>
