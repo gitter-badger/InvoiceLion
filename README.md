@@ -1,1 +1,1 @@
-# ![logo](/web/img/invoicelion.png | width=100) InvoiceLion
+# <img src="./web/img/invoicelion.png" alt="logo" width="100" /> InvoiceLion
