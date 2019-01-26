@@ -1,0 +1,241 @@
+@CHARSET "UTF-8";
+
+@import '/css/fonts.css';
+
+* {padding: 0; margin: 0;}
+body, html {height: 100%;}
+body {overflow: auto; font-size: 18px; line-height: 1.5em; color: #000; font-family: 'Roboto', sans-serif; background: #fff;}
+img {display: block;}
+.main {min-height: 100%;}
+.main > div.content {padding: 70px 20px 70px; font-size: 14px; line-height: 1.5em;}
+.showmenu .main > div.content {padding: 70px 20px 110px;}
+.main > div a {color: #000;}
+.main > div.content ul {margin-left: 20px;}
+a {background: transparent;}
+.icons, .header {position: fixed; top: 0; width: 100%; text-align: center; background: white; padding: 10px 0; z-index: 9; color: white;}
+.showmenu .header {display: block; height: 0px; padding: 0; border: 0; overflow: hidden;}
+.scrolled .header::after {
+    content: ""; 
+    width: 100%; 
+    height: 1px; 
+    background: rgba(0,0,0,0.05);
+    position: absolute; 
+    bottom: 0; 
+    left: 0;
+}
+.icons {display: none; bottom: 0; top: auto; border-bottom: 0; border-top: 1px solid #eee;}
+.icons > div {display: flex; justify-content: space-around;}
+.icons > div a {display: block; flex: 1; padding: 10px 0; margin: -10px 0;}
+.icons > div a#branding {display: none;}
+.icons > div a img {height: 24px; opacity: 1; display: block; width: auto; margin: 0px auto 3px;}
+.icons > div a span {display: none;}
+.icons > div a img + img {display: none;}
+.icons > div a.active img {display: none;}
+.icons > div a.active img + img {display: block;}
+.showmenu .icons {display: block;}
+.overlay {position: fixed; top: 0; width: 100%; height: 100%; text-align: center; background: rgba(0,0,0,0.1); z-index: 10;}
+.overlay > div {position: absolute; top: 50%; padding: 0 20px; width: calc(100% - 40px); 
+    -webkit-transform: translateY(-50%); 
+    -ms-transform: translateY(-50%); 
+    transform: translateY(-50);
+}
+p, ul, ol, .form {margin-bottom: 1.5em;}
+h1 + p {font-size: 132%; line-height: 1.5em; max-width: 700px;}
+.bold {font-weight: bold;}
+.text-center {text-align: center;}
+h1 {font-size: 45px; margin-bottom: 20px; line-height: 1em; font-weight: 900; letter-spacing: 0.5px;}
+h1::after {
+    display: block;
+    content: "";
+    width: 24px;
+    height: 2px;
+    background: black;
+    margin: 20px 0 10px;
+}
+h2 {font-size: 18.4px; margin-bottom: 10px; line-height: 1.2em; font-weight: 700;}
+* + h2 {margin-top: 30px;}
+.btn-primary, .btn-danger, .btn-default {display: inline-block; background: #18b663; color: white!important; padding: 9px 15px 8px; font-weight: 700; font-size: 12px; border: 1px solid #18b663; text-transform: uppercase; border-radius: 3px; transition: all .2s ease-in-out; text-decoration: none;
+}
+.btn-default, .btn-primary:hover, .btn-danger {background: white; color: #18b663!important;}
+h2 a {text-decoration: none;}
+.nav a:hover, .hover:hover, .hover:hover a {cursor: pointer; color: #18b663;}
+.pull-right {float: right;}
+h1 .btn-primary {font-size: 12px; line-height: 1.5em; margin-top: 5px; float: right; }
+.inline-icon {height: 16px; display: inline-block;}
+pre {font-family: 'Roboto', sans-serif;}
+.alert {position: fixed; left: 0; width: 100%; background: #eee; font-weight: bold; z-index: 999;animation-name: slideOutTop; animation-duration: 3s; bottom: 100vh;}
+.alert.alert-success {background: #18b663; color: white;}
+.alert.alert-danger {background: #E53935; color: white!important;}
+.alert.alert-success button, .alert.alert-danger button {color: white;}
+.alert > div {margin: 13px auto 15px; padding: 0 20px;}
+.alert button {opacity: 0.5; cursor: pointer; font-weight: bold; position: absolute; padding: 10px 20px; background: none; border: 0; font-size: 130%; right: 0; top: 0; z-index: 50;}
+@media (min-width: 1200px) {
+    .alert > div {width: calc(100% - 300px); position: relative; left: 130px; max-width: 1200px;}
+}
+@keyframes slideOutTop {
+    0%   {transform: translateY(100%);}
+    80%   {transform: translateY(100%);}
+    100% {transform: translateY(0%);}
+}
+
+
+.card {border: 1px solid rgba(0,0,0,0.05); border-radius: 5px; padding: 5px 0px 8px;}
+.card tr th:first-child, .card tr td:first-child span {padding-left: 15px;}
+.card tr th:last-child, .card tr td:last-child span {padding-right: 15px;}
+.card .status {position: relative; margin: 0px auto; max-width: 200px; padding: 15px; text-align: center;}
+.card .status .img {background: #eee url(/img/invoicelion_inverted.png) center top / auto 102% no-repeat; border-radius: 100%; margin: 10px 0; opacity: 0.07; border-radius: 100%; padding-bottom: 100%;}
+.default .card > div {padding: 30px 30px 20px 30px;}
+.default .card {background: white; max-width: 420px; margin: 0 auto; position: relative; z-index: 1;}
+
+
+.default .content {padding-top: 5px!important;}
+.default .content::before {content: ""; position: absolute; z-index: 0; left: 0; width: 100%; top: 0; background: black; height: 200px;}
+.default .content a#branding {color: white; position: relative; width: 100px; display: block; margin: 0 auto; opacity: 0.4; text-align: center; text-decoration: none; font-weight: bold;}
+.default .content a#branding img {width: 100%;}
+.default .content a#branding span {position: relative; bottom: 20px;}
+body.default {background: #eee;}
+
+dl {margin-bottom: 15px;}
+dt {font-weight: 700;}
+dd {font-size: 18px; line-height: 1.5em;}
+div + p {padding-top: 15px;}
+
+
+
+
+.col50 {width: calc(45% - 2px); float: left; margin-bottom: 40px;}
+.col50 + .col50 {margin-left: 5%;}
+@media (max-width: 1200px) {
+    .col50 {float: none; width: auto;}
+    .col50 + .col50 {margin-left: 0%;}
+}
+
+
+
+
+
+
+/* desktop navigation */
+.showmenu .nav {display: block;}
+.showmenu .nav a {display: inline-block; border-bottom: 1px solid rgba(0,0,0,0.05); padding: 5px 0; width: 100%; text-decoration: none;}
+.showmenu .nav a:last-of-type {border-bottom: 0;}
+.showmenu .nav h2 {padding-top: 40px;}
+.onlymobile {display: block!important;}
+.onlydesktop, .icons div.bottom {display: none!important;}
+@media (min-width: 1200px) {
+    .showmenu .nav {
+        display: block;
+        position: fixed; 
+        left: 0; top: 0; 
+        width: 140px; 
+        height: 100vh; 
+        padding: 0 30px 0 90px;
+        background: white;
+        padding-top: 15px;
+        background: #eee;
+    }
+    .showmenu .nav h2 {display: none;}
+    .showmenu .content {margin: 0 auto; width: calc(100% - 300px); max-width: 1200px; position: relative; left: 130px;}
+    .showmenu .icons {position: fixed; left: 0; top: 0; bottom: auto; width: 60px; height: 100vh; border-right: 1px solid rgba(0,0,0,0.05); border-top: 0; padding-top: 0;}
+    .showmenu .icons > div {display: block;}
+    .showmenu .icons > div a {display: block; margin: 1px auto;}
+    .showmenu .icons > div a#branding {display: block; background: black; margin: 0 0 5px;}
+    .showmenu .icons > div a#branding > span {display: block; height: 40px; background: black url(/img/invoicelion_inverted.png) center center / cover no-repeat; opacity: 0.4;}
+    .onlydesktop, .icons div.bottom {display: block!important;}
+    .icons div.bottom {position: absolute; bottom: 10px; width: 100%;}
+    .onlymobile {display: none!important;}
+}
+
+
+
+
+
+
+
+
+
+/* form */
+.form input {margin-bottom: 1em;}
+input, select, textarea {height: 40px; padding: 0 10px; line-height: 40px; background: none; border: 1px solid #ccc; width: calc(100% - 22px); max-width: 500px; font-size: 16px; font-family: 'Roboto', sans-serif;}
+label {
+    display: block; 
+    font-weight: 700; 
+    padding-bottom: 3px; 
+    background: transparent;
+}
+label a {float: right; font-weight: 300;}
+table + p {padding-top: 30px;}
+.form-group {margin-bottom: 15px;}
+select {padding: 0 10px; width: calc(100% - 2px); max-width: 522px;}
+textarea {height: 200px; line-height: 1.5em; padding-top: 9px; padding-bottom: 9px;}
+input[type="checkbox"] {height: auto; width: auto; max-width: none;}
+th[order] {cursor: pointer;}
+th.selected {text-decoration: underline;}
+.tag {text-decoration: none; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; display: inline-block; padding: 2px 7px; font-size: 85%; margin-right: 2px;}
+input[type="file"] { border:0; padding:0;}
+
+
+
+
+
+
+/* tables */
+table {width: 100%;}
+th, td {padding: 5px 0; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.05); position: relative;}
+td:before {
+    content: '&nbsp;';
+    visibility: hidden;
+}
+td span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+tr:last-child td {border-bottom: 0px solid rgba(0,0,0,0.05);}
+
+
+
+
+
+.bool {text-align: center; width: 50px;}
+.day {width: 30px;}
+.date {width: 100px;}
+.name {width: 300px;}
+.money {width: 100px; text-align: right;}
+.money span::before {content: '€ '}
+.number {width: 50px;}
+.text {width: 100px;}
+.text_medium {width: 200px;}
+.text_long {width: 300px;}
+.precentage {width: 55px;}
+
+
+
+
+
+
+
+
+
+
+
+
+/* iOS fix */
+body.iOS .icons {
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+
+
+
+
+#debugger-bar {
+    z-index: 99; 
+    left: auto!important; 
+    right: 0!important; 
+    width: 200px!important; 
+    border-left: 1px solid silver;
+}

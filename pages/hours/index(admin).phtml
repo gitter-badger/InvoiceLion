@@ -1,0 +1,29 @@
+<?php Buffer::set('title','Hours'); ?>
+<h2><a href="/">Home</a></h2>
+<h1>Hours <a href="hours/add" class="btn-primary">Add hours</a></h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th class="day">Day</th>
+      <th class="date <?php if($order=='date') e('selected'); ?>" order="/hours/date/desc">Date</th>
+      <th class="number <?php if($order=='hours_worked') e('selected'); ?>" order="/hours/hours_worked/desc">Hours</th>
+      <th class="name <?php if($order=='name') e('selected'); ?>" order="/hours/name/asc">Name</th>
+      <th class="text <?php if($order=='customer_id') e('selected'); ?>" order="/hours/customer_id/asc">Customer</th>
+      <th class="money <?php if($order=='subtotal') e('selected'); ?>" order="/hours/subtotal/desc">Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($data as $row): ?>
+    <tr class="hover" onclick="window.location.href='hours/view/<?php e($row['hours']['id']);?>';">
+      <td class="day"><span><?php e(date('D', strtotime($row['hours']['date'])));?></span></td>
+      <td class="date"><span><?php e($row['hours']['date']);?></span></td>
+      <td class="number"><span><?php e($row['hours']['hours_worked']);?></span></td>
+      <td class="name"><span><?php e($row['hours']['name']);?></span></td>
+      <td class="text"><span><?php if(isset($row['hours']['customer_id'])) { ?><a href="projects/view/<?php e($row['hours']['customer_id']); ?>"><?php e($customers[$row['hours']['customer_id']]);?></a><?php } ?></span></td>
+      <td class="money"><span><?php if($row['hours']['subtotal']) e($row['hours']['subtotal']); else e('0'); ?></span></td>
+    </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
+<p><a class="btn-primary" href="hours/add">Add hours</a></p>

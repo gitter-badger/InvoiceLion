@@ -1,0 +1,25 @@
+<?php Buffer::set('title','Customers'); ?>
+<h2><a href="/">Home</a></h2>
+<h1>Customers <a href="customers/add" class="btn-primary">Add customer</a></h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th class="name <?php if($order=='name') e('selected'); ?>" order="/customers/name/asc">Name</th>
+      <th class="<?php if($order=='email') e('selected'); ?>" order="/customers/email/asc">Email address</th>
+      <th class="<?php if($order=='contact') e('selected'); ?>" order="/customers/contact/asc">Contact</th>
+      <th class="bool <?php if($order=='vat_reverse_charge') e('selected'); ?>" order="/customers/vat_reverse_charge/asc">VAT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($data as $row): ?>
+    <tr class="hover" onclick="window.location.href='customers/view/<?php e($row['customers']['id']);?>';">
+      <td class="name"><span><?php e($row['customers']['name']);?></span></td>
+      <td><span><?php e($row['customers']['email']);?></span></td>
+      <td><span><?php e($row['customers']['contact']);?></span></td>
+      <td class="bool"><span><?php if($row['customers']['vat_reverse_charge']) e('no'); else e('yes'); ?></span></td>
+    </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
+<p><a class="btn-primary" href="customers/add">Add customer</a></p>

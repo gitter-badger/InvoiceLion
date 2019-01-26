@@ -1,0 +1,101 @@
+<div class="page-header">
+  <h2><a href="/">Home</a> / <a href="subscriptions">Subscriptions</a></h2>
+  <h1><?php e($data['subscriptions']['name']);?></h1>
+</div>
+<div>
+
+	<dl>
+		<dt>Project</dt>
+  	<dd>
+				<?php if($data['subscriptions']['project_id']) {?>
+					<a href="projects/view/<?php e($data['subscriptions']['project_id']); ?>"><?php e($projects[$data['subscriptions']['project_id']]); ?></a>
+				<?php } else { ?>
+					<?php e('-'); ?>
+				<?php } ?>
+		</dd>
+  </dl>
+	
+	<dl>
+		<dt>Customer</dt>
+  	<dd>
+		  <?php if(isset($data['subscriptions']['customer_id'])) {?>
+				<a href="/customers/view/<?php e($data['subscriptions']['customer_id']); ?>"><?php e($customers[$data['subscriptions']['customer_id']]); ?></a>
+			<?php } else e('-'); ?>
+		</dd>
+  </dl>
+
+	<dl>
+		<dt>Fee</dt>
+ 		<dd><?php e($data['subscriptions']['fee']);?></dd>
+  </dl>
+
+	<dl>
+		<dt>VAT percentage</dt>
+ 		<dd><?php e($data['subscriptions']['vat_percentage']);?></dd>
+  </dl>
+
+	<dl>
+		<dt>Months</dt>
+  	<dd><?php e($data['subscriptions']['months']);?></dd>
+  </dl>
+
+	<dl>
+		<dt>From</dt>
+		<dd><?php e($data['subscriptions']['from']);?></dd>
+  </dl>
+
+	<?php if($data['subscriptions']['canceled']) {?><dl>
+		<dt>Canceled</dt>
+  	<dd><?php e($data['subscriptions']['canceled']);?></dd>
+  </dl><?php } ?>
+	
+	<?php if($data['subscriptions']['comment']) {?><dl>
+		<dt>Comment</dt>
+ 		<dd><?php e($data['subscriptions']['comment']);?></dd>
+ 	</dl><?php } ?>
+
+	<dl>
+		<dt>Subscription type</dt>
+  	<dd>
+		  <?php if(isset($subscriptiontypes[$data['subscriptions']['subscriptiontype_id']])) { ?>
+		  	<a href="/subscriptiontypes/view/<?php e($data['subscriptions']['subscriptiontype_id']); ?>"><?php e($subscriptiontypes[$data['subscriptions']['subscriptiontype_id']]);?></a>
+		  <?php } else { ?>
+			<?php e('-'); ?>
+		  <?php } ?>
+		</dd>
+	</dl>
+
+
+
+</div>
+
+<br />
+
+<table class="table">
+  <thead>
+    <tr>
+			<th class="date">Period (from)</th>
+	  	<th class="name">Name</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<?php foreach ($invoiceperiods as $row): ?>
+    <tr class="hover" onclick="window.location.href='subscriptionperiods/view/<?php e($row['subscriptionperiods']['id']);?>';">
+			<td class="date"><span><?php e($row['subscriptionperiods']['from']);?></span></td>
+	  	<td class="name"><span><?php e($row['subscriptionperiods']['name']);?></span></td>
+    </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
+<br /><br />
+
+<p>
+	<a class="btn btn-danger pull-right" href="subscriptions/delete/<?php e($id); ?>">Delete</a>
+	<a class="btn btn-primary" href="subscriptions/edit/<?php e($id); ?>">Edit</a>
+</p>
+
+
+	
+
+

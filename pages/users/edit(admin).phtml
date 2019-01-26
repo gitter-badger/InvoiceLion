@@ -1,0 +1,29 @@
+<div class="page-header">
+  <h1>Edit user</h1>
+</div>
+<?php if (isset($error)): ?><div class="alert alert-danger"><button type="button" class="close">x</button><div><?php e($error); ?></div></div><?php endif; ?>
+<form method="post">
+  
+	<div class="form-group <?php e(isset($errors['users[username]'])?'has-error':''); ?>">
+		<label class="control-label" for="users[username]">Username</label>
+		<input class="form-control" name="users[username]" type="text" value="<?php e($data['users']['username']); ?>" id="users[username]" />
+		<span class="help-block"><?php if (isset($errors['users[username]'])) e($errors['users[username]']); ?></span>
+	</div>
+  
+	<div class="form-group <?php e(isset($errors['users[password]'])?'has-error':''); ?>">
+		<label class="control-label" for="users[password]">Password</label>
+		<input class="form-control" name="users[password]" type="text" value="<?php e($data['users']['password']); ?>" id="users[password]" />
+		<span class="help-block"><?php if (isset($errors['users[password]'])) e($errors['users[password]']); ?></span>
+	</div>
+  
+	<div class="form-group <?php e(isset($errors['users[created]'])?'has-error':''); ?>">
+		<label class="control-label" for="users[created]">Created</label>
+		<input class="form-control" name="users[created]" type="text" value="<?php e($data['users']['created']); ?>" id="users[created]" />
+		<span class="help-block"><?php if (isset($errors['users[created]'])) e($errors['users[created]']); ?></span>
+	</div>
+
+	<div class="form-group">
+		<button class="btn btn-primary" type="submit">Save</button>
+	</div>
+	<?php Session::getCsrfInput(); ?>
+</form> 

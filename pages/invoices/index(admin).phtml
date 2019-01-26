@@ -1,0 +1,29 @@
+<?php Buffer::set('title','Invoices'); ?>
+<h2><a href="/">Home</a></h2>
+<h1>Invoices <a href="invoices/add" class="btn-primary">Add invoice</a></h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th class="text <?php if($order=='number') e('selected'); ?>" order="/invoices/number/desc">Number</th>
+      <th class="name <?php if($order=='name') e('selected'); ?>" order="/invoices/name/asc">Name</th>
+      <th class="bool <?php if($order=='paid' || $order=='sent, paid') e('selected'); ?>" order="/invoices/paid/asc">Paid</th>
+      <th class="date <?php if($order=='date') e('selected'); ?>" order="/invoices/date/desc">Date</th>
+      <th class="<?php if($order=='customer_id') e('selected'); ?>" order="/invoices/customer_id/asc">Customer</th>
+      <th class="money">Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($data as $row): ?>
+    <tr class="hover" onclick="window.location.href='invoices/view/<?php e($row['invoices']['id']);?>';">
+      <td class="text"><span><?php e($row['invoices']['number']);?></span></td>  
+      <td class="name"><span><?php if(isset(explode(" - ",$row['invoices']['name'])[1])) e(explode(" - ",$row['invoices']['name'])[1]); else e($row['invoices']['name']); ?></span></td>
+      <td class="bool"><span><?php if($row['invoices']['sent']) { if($row['invoices']['paid']) e('yes'); else e('no'); } else e('-'); ?></span></td>
+      <td class="date"><span><?php e($row['invoices']['date']);?></span></td>
+      <td><span><?php if(isset($row['invoices']['customer_id'])) { ?><a href="customers/view/<?php e($row['invoices']['customer_id']); ?>"><?php e($customers[$row['invoices']['customer_id']]);?></a><?php } ?></span></td>
+      <td class="money"><span><?php e($row['invoices']['subtotal']); ?></span></td>
+    </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
+<p><a class="btn-primary" href="invoices/add">Add invoice</a></p>

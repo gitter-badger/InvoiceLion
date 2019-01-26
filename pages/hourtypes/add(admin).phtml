@@ -1,0 +1,17 @@
+<div class="page-header">
+  <h1>New hour type</h1>
+</div>
+<?php if (isset($error)): ?><div class="alert alert-danger"><button type="button" class="close">x</button><div><?php e($error); ?></div></div><?php endif; ?>
+<form method="post">
+  
+	<div class="form-group <?php e(isset($errors['hourtypes[name]'])?'has-error':''); ?>">
+		<label class="control-label" for="hourtypes[name]">Name</label>
+		<input class="form-control" name="hourtypes[name]" type="text" value="<?php e($data['hourtypes']['name']); ?>" id="hourtypes[name]" />
+		<span class="help-block"><?php if (isset($errors['hourtypes[name]'])) e($errors['hourtypes[name]']); ?></span>
+	</div>
+
+	<div class="form-group">
+		<button class="btn btn-primary" type="submit">Save</button>
+	</div>
+	<?php Session::getCsrfInput(); ?>
+</form> 

@@ -1,0 +1,35 @@
+<?php Buffer::set('title','Edit project'); ?>
+<div class="page-header">
+  <h1>Edit projects</h1>
+</div>
+<?php if (isset($error)): ?><div class="alert alert-danger"><button type="button" class="close">x</button><div><?php e($error); ?></div></div><?php endif; ?>
+<form method="post">
+  
+	<div class="form-group <?php e(isset($errors['projects[name]'])?'has-error':''); ?>">
+		<label class="control-label" for="projects[name]">Name</label>
+		<input class="form-control" name="projects[name]" type="text" value="<?php e($data['projects']['name']); ?>" id="projects[name]" />
+		<span class="help-block"><?php if (isset($errors['projects[name]'])) e($errors['projects[name]']); ?></span>
+	</div>
+  
+	<div class="form-group <?php e(isset($errors['projects[customer_id]'])?'has-error':''); ?>">
+		<label class="control-label" for="projects[customer_id]">Customer</label>
+		<select class="form-control" name="projects[customer_id]" id="projects[customer_id]">
+			<option value=""<?php e(''==$data['projects']['customer_id']?' selected="selected"':''); ?>></option>
+			<?php foreach ($customers as $key => $value): ?>
+			<option value="<?php e($key); ?>"<?php e($key==$data['projects']['customer_id']?' selected="selected"':''); ?>><?php e($value); ?></option>
+			<?php endforeach; ?>
+		</select>
+		<span class="help-block"><?php if (isset($errors['projects[customer_id]'])) e($errors['projects[customer_id]']); ?></span>
+	</div>
+  
+	<div class="form-group <?php e(isset($errors['projects[active]'])?'has-error':''); ?>">
+		<label class="control-label" for="projects[active]">Active</label>
+		<input class="form-control" name="projects[active]" type="checkbox" id="projects[active]" value="1" <?php if($data['projects']['active']) e('checked'); ?> />
+		<span class="help-block"><?php if (isset($errors['projects[active]'])) e($errors['projects[active]']); ?></span>
+	</div>
+
+	<div class="form-group">
+		<button class="btn btn-primary" type="submit">Save</button>
+	</div>
+	<?php Session::getCsrfInput(); ?>
+</form> 

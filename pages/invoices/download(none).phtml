@@ -1,0 +1,35 @@
+<?php 
+ob_start(); 
+list($x,$y,$text) = explode(',',str_replace('"','',$tenant['tenants']['invoice_page_number']));
+?>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title><?php e($invoice['invoices']['number'].' - '.$invoice['invoices']['name']); ?></title>
+  <style type="text/css">
+    <?php Buffer::get('invoice_styles'); ?>
+  </style>
+</head>
+<body>
+	<?php Buffer::get('invoice_template'); ?>
+	<script type="text/php">
+	$pdf->page_text(<?php e($x)?>,<?php e($y)?>,"<?php e($text)?>", $fontMetrics->get_font("helvetica", "regular"), 9, array(0,0,0));
+	</script>
+</body>
+</html>
+<?php
+$html = ob_get_contents();
+ob_end_clean();
+
+$options = new Dompdf\Options();
+$options->set("isPhpEnabled", true);
+$dompdf = new Dompdf\Dompdf($options);
+$dompdf->load_html($html);
+$dompdf->set_paper("a4");
+$dompdf->render();
+
+$filename = $invoice['invoices']['number'].' - '.$invoice['invoices']['name'].".pdf";
+
+if(isset($include) && $include==1) $pdfoutput = $dompdf->output(); 
+else $dompdf->stream($filename);

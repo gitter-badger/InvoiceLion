@@ -1,0 +1,126 @@
+<?php Buffer::set('title','Settings'); ?>
+<h2>Home</h2>
+<h1>Edit settings</h1>
+
+<?php if (isset($error)): ?><div class="alert alert-danger"><button type="button" class="close">x</button><div><?php e($error); ?></div></div><?php endif; ?>
+<form method="post">
+
+    <div class="form-group <?php e(isset($errors['tenants[timetracking]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[timetracking]">Time tracking</label>
+		<input class="form-control" name="tenants[timetracking]" type="checkbox" value="1" id="tenants[timetracking]" <?php if($data['tenants']['timetracking']) e('checked'); ?> disabled />
+		<span class="help-block"><?php if (isset($errors['tenants[timetracking]'])) e($errors['tenants[timetracking]']); ?></span>
+		</div>
+
+    <div class="form-group <?php e(isset($errors['tenants[name]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[name]">Company name</label>
+		<input class="form-control" name="tenants[name]" type="text" id="tenants[name]" value="<?php e($data['tenants']['name']); ?>" />
+		<span class="help-block"><?php if (isset($errors['tenants[name]'])) e($errors['tenants[name]']); ?></span>
+    </div>
+
+    <div class="form-group <?php e(isset($errors['tenants[contact]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[contact]">Contact name</label>
+		<input class="form-control" name="tenants[contact]" type="text" id="tenants[contact]" value="<?php e($data['tenants']['contact']); ?>" />
+		<span class="help-block"><?php if (isset($errors['tenants[contact]'])) e($errors['tenants[contact]']); ?></span>
+		</div>
+		
+    <div class="form-group <?php e(isset($errors['tenants[address]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[address]">Address</label>
+		<textarea class="form-control" name="tenants[address]" type="text" id="tenants[address]"><?php e($data['tenants']['address']); ?></textarea>
+		<span class="help-block"><?php if (isset($errors['tenants[address]'])) e($errors['tenants[address]']); ?></span>
+    </div>
+
+    <div class="form-group <?php e(isset($errors['tenants[email]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[email]">Email address</label>
+		<input class="form-control" name="tenants[email]" type="text" id="tenants[email]" value="<?php e($data['tenants']['email']); ?>" />
+		<span class="help-block"><?php if (isset($errors['tenants[email]'])) e($errors['tenants[email]']); ?></span>
+    </div>
+
+    <div class="form-group <?php e(isset($errors['tenants[invoice_email]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[invoice_email]">Email address (for outgoing invoices)</label>
+		<input class="form-control" name="tenants[invoice_email]" type="text" id="tenants[invoice_email]" value="<?php e($data['tenants']['invoice_email']); ?>" />
+		<span class="help-block"><?php if (isset($errors['tenants[invoice_email]'])) e($errors['tenants[invoice_email]']); ?></span>
+    </div>
+
+    <div class="form-group <?php e(isset($errors['tenants[phone]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[phone]">Phone number</label>
+		<input class="form-control" name="tenants[phone]" type="text" id="tenants[phone]" value="<?php e($data['tenants']['phone']); ?>" />
+		<span class="help-block"><?php if (isset($errors['tenants[phone]'])) e($errors['tenants[phone]']); ?></span>
+    </div>
+
+    <div class="form-group <?php e(isset($errors['tenants[bank_account_number]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[bank_account_number]">Bank account number</label>
+		<input class="form-control" name="tenants[bank_account_number]" type="text" id="tenants[bank_account_number]" value="<?php e($data['tenants']['bank_account_number']); ?>" />
+		<span class="help-block"><?php if (isset($errors['tenants[bank_account_number]'])) e($errors['tenants[bank_account_number]']); ?></span>
+    </div>
+
+    <div class="form-group <?php e(isset($errors['tenants[bank_account_name]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[bank_account_name]">Bank account name</label>
+		<input class="form-control" name="tenants[bank_account_name]" type="text" id="tenants[bank_account_name]" value="<?php e($data['tenants']['bank_account_name']); ?>" />
+		<span class="help-block"><?php if (isset($errors['tenants[bank_account_name]'])) e($errors['tenants[bank_account_name]']); ?></span>
+    </div>
+
+    <div class="form-group <?php e(isset($errors['tenants[bank_name]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[bank_name]">Bank name</label>
+		<input class="form-control" name="tenants[bank_name]" type="text" id="tenants[bank_name]" value="<?php e($data['tenants']['bank_name']); ?>" />
+		<span class="help-block"><?php if (isset($errors['tenants[bank_name]'])) e($errors['tenants[bank_name]']); ?></span>
+    </div>
+
+    <div class="form-group <?php e(isset($errors['tenants[bank_bic]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[bank_bic]">Bank BIC</label>
+		<input class="form-control" name="tenants[bank_bic]" type="text" id="tenants[bank_bic]" value="<?php e($data['tenants']['bank_bic']); ?>" />
+		<span class="help-block"><?php if (isset($errors['tenants[bank_bic]'])) e($errors['tenants[bank_bic]']); ?></span>
+    </div>
+
+    <div class="form-group <?php e(isset($errors['tenants[bank_city]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[bank_city]">Bank city</label>
+		<input class="form-control" name="tenants[bank_city]" type="text" id="tenants[bank_city]" value="<?php e($data['tenants']['bank_city']); ?>" />
+		<span class="help-block"><?php if (isset($errors['tenants[bank_city]'])) e($errors['tenants[bank_city]']); ?></span>
+    </div>
+
+    <div class="form-group <?php e(isset($errors['tenants[coc_number]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[coc_number]">COC number</label>
+		<input class="form-control" name="tenants[coc_number]" type="text" id="tenants[coc_number]" value="<?php e($data['tenants']['coc_number']); ?>" />
+		<span class="help-block"><?php if (isset($errors['tenants[coc_number]'])) e($errors['tenants[coc_number]']); ?></span>
+    </div>
+
+    <div class="form-group <?php e(isset($errors['tenants[vat_number]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[vat_number]">VAT number</label>
+		<input class="form-control" name="tenants[vat_number]" type="text" id="tenants[vat_number]" value="<?php e($data['tenants']['vat_number']); ?>" />
+		<span class="help-block"><?php if (isset($errors['tenants[vat_number]'])) e($errors['tenants[vat_number]']); ?></span>
+    </div>
+    
+		<div class="form-group <?php e(isset($errors['tenants[payment_period]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[payment_period]">Payment period (in days)</label>
+		<input class="form-control" name="tenants[payment_period]" type="number" id="tenants[payment_period]" value="<?php e($data['tenants']['payment_period']); ?>"/>
+		<span class="help-block"><?php if (isset($errors['tenants[payment_period]'])) e($errors['tenants[payment_period]']); ?></span>
+		</div>
+
+		<div class="form-group <?php e(isset($errors['tenants[reminder_period]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[reminder_period]">Reminder period (in days)</label>
+		<input class="form-control" name="tenants[reminder_period]" type="number" id="tenants[reminder_period]" value="<?php e($data['tenants']['reminder_period']); ?>"/>
+		<span class="help-block"><?php if (isset($errors['tenants[reminder_period]'])) e($errors['tenants[reminder_period]']); ?></span>
+		</div>
+
+		<div class="form-group <?php e(isset($errors['tenants[invoice_styles]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[invoice_styles]">Invoice styles</label>
+		<textarea class="form-control" name="tenants[invoice_styles]" type="text" id="tenants[invoice_styles]"><?php e($data['tenants']['invoice_styles']); ?></textarea>
+		<span class="help-block"><?php if (isset($errors['tenants[invoice_styles]'])) e($errors['tenants[invoice_styles]']); ?></span>
+		</div>
+
+		<div class="form-group <?php e(isset($errors['tenants[invoice_template]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[invoice_template]">Invoice template</label>
+		<textarea class="form-control" name="tenants[invoice_template]" type="text" id="tenants[invoice_template]"><?php e($data['tenants']['invoice_template']); ?></textarea>
+		<span class="help-block"><?php if (isset($errors['tenants[invoice_template]'])) e($errors['tenants[invoice_template]']); ?></span>
+		</div>
+
+		<div class="form-group <?php e(isset($errors['tenants[invoice_page_number]'])?'has-error':''); ?>">
+		<label class="control-label" for="tenants[invoice_page_number]">Invoice page number</label>
+		<textarea class="form-control" name="tenants[invoice_page_number]" type="text" id="tenants[invoice_page_number]"><?php e($data['tenants']['invoice_page_number']); ?></textarea>
+		<span class="help-block"><?php if (isset($errors['tenants[invoice_page_number]'])) e($errors['tenants[invoice_page_number]']); ?></span>
+		</div>
+
+    <div class="form-group">
+		<button class="btn btn-primary" type="submit">Save</button>
+	</div>
+	<?php Session::getCsrfInput(); ?>
+</form>

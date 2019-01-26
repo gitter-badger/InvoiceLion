@@ -1,0 +1,16 @@
+<?php Buffer::set('title','Password forgotten'); ?>
+<h1>Password forgotten</h1>
+<p>No worries! Just enter your e-mail below and we will send you a password reset link.</p>
+<?php if (isset($error)): ?><div class="alert alert-danger"><button type="button" class="close">x</button><div><?php e($error); ?></div></div><?php endif; ?>
+<form method="post">
+    <div class="form-group">
+        <label class="control-label" for="username">Email</label>
+        <input class="form-control" id="username" name="username"/>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn-primary">Submit</button>
+    </div>
+    <?php Session::getCsrfInput(); ?>
+</form>
+
+<p><a href="auth/login">Login</a></p>

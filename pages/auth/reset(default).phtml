@@ -1,0 +1,24 @@
+<?php Buffer::set('title','Reset password'); ?>
+<h1>Reset password</h1>
+<?php if (isset($error)): ?><div class="alert alert-danger"><button type="button" class="close">x</button><div><?php e($error); ?></div></div><?php endif; ?>
+<form method="post">
+
+    <input type="hidden" name="token" value="<?php e($token); ?>"/>
+
+    <div class="form-group">
+        <label class="control-label" for="username">Username</label>
+        <input name="username" value="<?php e($username); ?>" disabled="disabled"/><br/>
+    </div>
+    <div class="form-group">    
+        <label class="control-label" for="password">Password</label>
+        <input class="form-control" id="password" type="password" name="password"/>
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="password2">Password (again)</label>
+        <input class="form-control" id="password2" type="password" name="password2"/>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+    <?php Session::getCsrfInput(); ?>
+</form>

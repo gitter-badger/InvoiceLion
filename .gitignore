@@ -1,0 +1,15 @@
+.idea
+.buildpath
+.project
+.settings
+.vscode
+project.geany
+composer.phar
+phpunit.phar
+config/config.php
+/vendor/
+/sessions/
+/web/debugger/
+syncdb.sh
+/pages/offers/
+/pdfimages/

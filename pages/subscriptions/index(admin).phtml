@@ -1,0 +1,31 @@
+<?php Buffer::set('title','Subscriptions'); ?>
+<h2><a href="/">Home</a></h2>
+<h1>Subscriptions <a href="subscriptions/add" class="btn-primary">Add subscription</a></h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th class="name <?php if($order=='name') e('selected'); ?>" order="subscriptions/name/desc">Name</th>
+      <th class="number <?php if($order=='months') e('selected'); ?>" order="subscriptions/months/desc">Times</th>
+      <th class="date <?php if($order=='from') e('selected'); ?>" order="subscriptions/from/desc">From</th>
+      <th class="date <?php if($order=='canceled') e('selected'); ?>" order="subscriptions/canceled/desc">Canceled</th>
+      <th class=" <?php if($order=='subscriptiontype_id') e('selected'); ?>" order="subscriptions/subscriptiontype_id/desc">Subscription type</th>
+      <th class=" <?php if($order=='customer_id') e('selected'); ?>" order="subscriptions/customer_id/desc">Customer</th>
+      <th class="money <?php if($order=='subtotal') e('selected'); ?>" order="subscriptions/subtotal/desc">Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($data as $row): ?>
+    <tr class="hover" onclick="window.location.href='subscriptions/view/<?php e($row['subscriptions']['id']);?>';">
+      <td class="name"><span><?php e($row['subscriptions']['name']);?></span></td>
+      <td class="number"><span><?php e($row['subscriptions']['months']);?></span></td>
+      <td class="date"><span><?php e($row['subscriptions']['from']);?></span></td>
+      <td class="date"><span><?php e($row['subscriptions']['canceled']);?></span></td>
+      <td><span><a href="subscriptiontypes/view/<?php e($row['subscriptions']['subscriptiontype_id']); ?>"><?php e($subscriptiontypes[$row['subscriptions']['subscriptiontype_id']]);?></a></span></td>
+      <td><span><?php if($row['subscriptions']['customer_id']) { ?><a href="customers/view/<?php e($row['subscriptions']['customer_id']); ?>"><?php e($customers[$row['subscriptions']['customer_id']]);?></a><?php } ?></span></td>
+      <td class="money"><span><?php e($row['subscriptions']['fee']);?></span></td>
+    </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
+<p><a class="btn-primary" href="subscriptions/add">Add subscription</a></p>

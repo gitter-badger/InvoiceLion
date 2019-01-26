@@ -1,0 +1,66 @@
+<?php Buffer::set('title','Edit invoice'); ?>
+<div class="page-header">
+	<h2><a href="/">Home</a> / <a href="invoices">Invoices</a></h2>
+  	<h1>Edit invoice</h1>
+</div>
+<?php if (isset($error)): ?><div class="alert alert-danger"><button type="button" class="close">x</button><div><?php e($error); ?></div></div><?php endif; ?>
+<form method="post">
+  
+	<div class="form-group <?php e(isset($errors['invoices[number]'])?'has-error':''); ?>">
+		<label class="control-label" for="invoices[number]">Number</label>
+		<input class="form-control" name="invoices[number]" type="number" value="<?php e($data['invoices']['number']); ?>" id="invoices[number]" />
+		<span class="help-block"><?php if (isset($errors['invoices[number]'])) e($errors['invoices[number]']); ?></span>
+	</div>
+  
+	<div class="form-group <?php e(isset($errors['invoices[name]'])?'has-error':''); ?>">
+		<label class="control-label" for="invoices[name]">Name</label>
+		<input class="form-control" name="invoices[name]" type="text" value="<?php e($data['invoices']['name']); ?>" id="invoices[name]" />
+		<span class="help-block"><?php if (isset($errors['invoices[name]'])) e($errors['invoices[name]']); ?></span>
+	</div>
+  
+	<div class="form-group <?php e(isset($errors['invoices[date]'])?'has-error':''); ?>">
+		<label class="control-label" for="invoices[date]">Date</label>
+		<input class="form-control" name="invoices[date]" type="date" value="<?php e($data['invoices']['date']); ?>" id="invoices[date]" />
+		<span class="help-block"><?php if (isset($errors['invoices[date]'])) e($errors['invoices[date]']); ?></span>
+	</div>
+  
+	<div class="form-group <?php e(isset($errors['invoices[sent]'])?'has-error':''); ?>">
+		<label class="control-label" for="invoices[sent]">Sent</label>
+		<input class="form-control" name="invoices[sent]" type="checkbox" <?php if($data['invoices']['sent']) e('checked'); ?> id="invoices[sent]" value="1" />
+		<span class="help-block"><?php if (isset($errors['invoices[sent]'])) e($errors['invoices[sent]']); ?></span>
+	</div>
+  
+	<div class="form-group <?php e(isset($errors['invoices[paid]'])?'has-error':''); ?>">
+		<label class="control-label" for="invoices[paid]">Paid</label>
+		<input class="form-control" name="invoices[paid]" type="checkbox" <?php if($data['invoices']['paid']) e('checked'); ?> id="invoices[paid]" value="1" />
+		<span class="help-block"><?php if (isset($errors['invoices[paid]'])) e($errors['invoices[paid]']); ?></span>
+	</div>
+  
+	<div class="form-group <?php e(isset($errors['invoices[reminder1]'])?'has-error':''); ?>">
+		<label class="control-label" for="invoices[reminder1]">First reminder</label>
+		<input class="form-control" name="invoices[reminder1]" type="date" value="<?php e($data['invoices']['reminder1']); ?>" id="invoices[reminder1]" />
+		<span class="help-block"><?php if (isset($errors['invoices[reminder1]'])) e($errors['invoices[reminder1]']); ?></span>
+	</div>
+  
+	<div class="form-group <?php e(isset($errors['invoices[reminder2]'])?'has-error':''); ?>">
+		<label class="control-label" for="invoices[reminder2]">Second reminder</label>
+		<input class="form-control" name="invoices[reminder2]" type="date" value="<?php e($data['invoices']['reminder2']); ?>" id="invoices[reminder2]" />
+		<span class="help-block"><?php if (isset($errors['invoices[reminder2]'])) e($errors['invoices[reminder2]']); ?></span>
+	</div>
+  
+	<div class="form-group <?php e(isset($errors['invoices[customer_id]'])?'has-error':''); ?>">
+		<label class="control-label" for="invoices[customer_id]">Customer</label>
+		<select class="form-control" name="invoices[customer_id]" id="invoices[customer_id]">
+			<option value=""<?php e(''==$data['invoices']['customer_id']?' selected="selected"':''); ?>></option>
+			<?php foreach ($customers as $key => $value): ?>
+			<option value="<?php e($key); ?>"<?php e($key==$data['invoices']['customer_id']?' selected="selected"':''); ?>><?php e($value); ?></option>
+			<?php endforeach; ?>
+		</select>
+		<span class="help-block"><?php if (isset($errors['invoices[customer_id]'])) e($errors['invoices[customer_id]']); ?></span>
+	</div>
+
+	<div class="form-group">
+		<button class="btn btn-primary" type="submit">Save</button>
+	</div>
+	<?php Session::getCsrfInput(); ?>
+</form> 

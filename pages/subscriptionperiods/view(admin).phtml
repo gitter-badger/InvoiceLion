@@ -1,0 +1,44 @@
+<div class="page-header">
+  <h2><a href="/">Home</a> / <a href="subscriptionperiods">Subscription months</a></h2>
+  <h1><?php e($data['subscriptionperiods']['name']);?></h1>
+</div>
+<div>
+	<dl>
+		<dt>From date</dt>
+  		<dd><?php e($data['subscriptionperiods']['from']);?></dd>
+ 
+  	</dl>
+	<dl>
+		<dt>Invoice</dt>
+  		<dd>
+		  	<?php if(isset($invoices[$data['subscriptionperiods']['invoice_id']])) {?>
+		  		<?php e($invoices[$data['subscriptionperiods']['invoice_id']]);?>
+		  	<?php } else {?>
+				-
+			<?php } ?>
+		</dd>
+		  
+  	</dl>
+	<dl>
+		<dt>Subscription</dt>
+  		<dd>
+		  <?php if($subscriptions[$data['subscriptionperiods']['subscription_id']]) { ?>
+		  	<a href="/subscriptions/view/<?php e($data['subscriptionperiods']['subscription_id']); ?>"><?php e($subscriptions[$data['subscriptionperiods']['subscription_id']]);?></a>
+		  <?php } else { ?>
+			-
+		  <?php } ?></dd>
+  	</dl>
+	<?php if($data['subscriptionperiods']['comment']) { ?><dl>
+		<dt>Text</dt>
+  		<dd><?php e($data['subscriptionperiods']['comment']);?></dd>
+ 
+	</dl><?php } ?>
+</div>
+<p>
+	<div class="pull-right">
+		<a class="btn btn-danger" href="subscriptionperiods/delete/<?php e($id); ?>">Delete</a>
+	<?php if(!$newer_period_exists) {?><a class="btn btn-default" href="subscriptionperiods/addnextperiod/<?php e($id); ?>">Add next period</a><?php } ?>
+	</div>
+	<a class="btn btn-primary" href="subscriptionperiods/edit/<?php e($id); ?>">Edit</a>
+	
+</p>

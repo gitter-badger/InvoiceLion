@@ -1,0 +1,55 @@
+<?php Buffer::set('title','View project'); ?>
+<div class="page-header">
+	<h2><a href="/">Home</a> / <a href="/projects">Projects</a></h2>
+  	<h1><?php e($data['projects']['name']);?></h1>
+</div>
+<div>
+	<dl>
+		<dt>Customer</dt>
+  		<dd><a href="/customers/view/<?php e($data['projects']['customer_id']); ?>"><?php e($customers[$data['projects']['customer_id']]);?></a></dd>
+ 
+  	</dl>
+	<dl>
+		<dt>Active</dt>
+  		<dd><?php $data['projects']['active'] ? e('yes') : e('no');?></dd>
+ 
+  	</dl>
+</div>
+
+<br />
+
+<table class="table">
+	<thead>
+		<tr>
+			<th class="date">Date</th>
+			<th class="name">Name</th>
+			<th class="number">Hours</th>
+			<th class="money">Subtotal</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($hours as $row): ?>
+		<tr class="hover" onclick="window.location.href='hours/view/<?php e($row['hours']['id']);?>';">
+			<td class="date"><span><?php e($row['hours']['date']);?></span></td>
+			<td class="name"><span><?php e($row['hours']['name']);?></span></td>
+			<td class="number"><span><?php if($row['hours']['hours_worked']) e($row['hours']['hours_worked']); else e('0'); ?></span></td>
+			<td class="money"><span><?php if($row['hours']['subtotal']) e($row['hours']['subtotal']); else e('0'); ?></span></td>
+		</tr>
+		<?php endforeach; ?>
+		<?php foreach ($subscriptionperiods as $row): ?>
+		<tr class="hover" onclick="window.location.href='subscriptionperiods/view/<?php e($row['subscriptionperiods']['id']);?>';">
+			<td class="date"><span><?php e($row['subscriptionperiods']['from']);?></span></td>
+			<td class="name"><span><?php e($row['subscriptionperiods']['name']);?></span></td>
+			<td class="number"><span></span></td>
+			<td class="money"><span><?php if($row['subscriptions']['fee']) e($row['subscriptions']['fee']); else e('0'); ?></span></td>
+		</tr>
+		<?php endforeach; ?>
+	</tbody>
+</table>
+
+<br /><br />
+
+<p>
+	<a class="btn btn-danger pull-right" href="projects/delete/<?php e($id); ?>">Delete</a>
+	<a class="btn btn-primary" href="projects/edit/<?php e($id); ?>">Edit</a>
+</p>

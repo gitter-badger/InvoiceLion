@@ -1,0 +1,118 @@
+<?php Buffer::set('title','Settings'); ?>
+<h2>Home</h2>
+<h1>Settings</h1>
+
+<p>Below you will find your preferences. You can set here if you want to enable time tracking, and you can enter the values that show up on your invoices.</p>
+
+<br />
+
+<div>
+    <!--<dl>
+        <dt>Time tracking</dt>
+        <dd>        
+            Yes
+        </dd>
+      </dl>-->
+    <dl>
+        <dt>Company name</dt>
+        <dd><?php e($data['tenants']['name']?:'-');?></dd>
+    </dl>
+    <dl>
+        <dt>Contact name</dt>
+        <dd><?php e($data['tenants']['contact']?:'-');?></dd>
+    </dl>
+    <dl>
+        <dt>Address</dt>
+        <dd><pre><?php e($data['tenants']['address']?:'-');?></pre></dd>
+    </dl>
+    <dl>
+        <dt>Email address</dt>
+        <dd><?php e($data['tenants']['email']?:'-');?></dd>
+    </dl>
+    <dl>
+        <dt>Email address (for outgoing invoices)</dt>
+        <dd><?php e($data['tenants']['invoice_email']?:'-');?></dd>
+    </dl>
+    <dl>
+        <dt>Phone</dt>
+        <dd><?php e($data['tenants']['phone']?:'-');?></dd>
+    </dl>
+    <dl>
+        <dt>Bank account number</dt>
+        <dd><?php e($data['tenants']['bank_account_number']?:'-');?></dd>
+    </dl>
+    <dl>
+        <dt>Bank account name</dt>
+        <dd><?php e($data['tenants']['bank_account_name']?:'-');?></dd>
+    </dl>
+    <dl>
+        <dt>Bank name</dt>
+        <dd><?php e($data['tenants']['bank_name']?:'-');?></dd>
+    </dl>
+    <dl>
+        <dt>Bank BIC</dt>
+        <dd><?php e($data['tenants']['bank_bic']?:'-');?></dd>
+    </dl>
+    <dl>
+        <dt>Bank city</dt>
+        <dd><?php e($data['tenants']['bank_city']?:'-');?></dd>
+    </dl>
+    <dl>
+        <dt>COC number</dt>
+        <dd><?php e($data['tenants']['coc_number']?:'-');?></dd>
+    </dl>
+    <dl>
+        <dt>VAT number</dt>
+        <dd><?php e($data['tenants']['vat_number']?:'-');?></dd>
+  	</dl>
+    <dl>
+        <dt>Payment period (in days)</dt>
+        <dd><?php e($data['tenants']['payment_period']?:'-');?></dd>
+  	</dl>
+    <dl>
+        <dt>Reminder period (in days)</dt>
+        <dd><?php e($data['tenants']['reminder_period']?:'-');?></dd>
+  	</dl>
+    <dl>
+        <dt>Logo (<a href="tenants/change/logo_image/2.5">change</a>)</dt>
+        <dd><img style="height: 2.5em;" src="data:image/png;base64,<?php e(base64_encode($data['tenants']['logo_image']));?>" /></dd>
+  	</dl>
+    <dl>
+        <dt>Signature (<a href="tenants/change/signature_image/5.5">change</a>)</dt>
+        <dd><img style="height: 5.5em;" src="data:image/png;base64,<?php e(base64_encode($data['tenants']['signature_image']));?>" /></dd>
+  	</dl>
+	<dl>
+        <dt>Hour types (<a href="hourtypes/index">manage</a>)</dt>
+        <dd>        
+            <?php if ($hourtypes): foreach ($hourtypes as $row): ?>
+            <a href="hourtypes/view/<?php e($row['hourtypes']['id']); ?>" class="tag"><?php e($row['hourtypes']['name']); ?></a>
+            <?php endforeach; else: e('-'); endif; ?>
+        </dd>
+    </dl>
+	<dl>
+        <dt>Subscription types (<a href="subscriptiontypes/index">manage</a>)</dt>
+        <dd>        
+            <?php if ($subscriptiontypes): foreach ($subscriptiontypes as $row): ?>
+            <a href="subscriptiontypes/view/<?php e($row['subscriptiontypes']['id']); ?>" class="tag"><?php e($row['subscriptiontypes']['name']); ?></a>
+            <?php endforeach; else: e('-'); endif; ?>
+        </dd>
+    </dl>
+    <dl>
+        <dt>Invoice styles</dt>
+        <dd><pre><?php e($data['tenants']['invoice_styles']?:'-');?></pre></dd>
+    </dl>
+    <dl>
+        <dt>Invoice template</dt>
+        <dd><pre><?php e($data['tenants']['invoice_template']?:'-');?></pre></dd>
+    </dl>
+    <dl>
+        <dt>Invoice page number</dt>
+        <dd><pre><?php e($data['tenants']['invoice_page_number']?:'-');?></pre></dd>
+    </dl>
+</div>
+
+<br />
+
+<p>
+	<a class="btn btn-primary" href="tenants/edit">Edit</a>
+</p>

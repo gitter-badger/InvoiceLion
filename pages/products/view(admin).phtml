@@ -1,0 +1,14 @@
+<div class="page-header">
+  <h1>View products</h1>
+</div>
+<div>
+	<dl>
+		<dt>Name</dt>
+  		<dd><?php e($data['products']['name']);?></dd>
+ 
+  	</dl>
+</div>
+<p>
+	<a class="btn btn-danger pull-right" href="products/delete/<?php e($id); ?>">Delete</a>
+	<a class="btn btn-primary" href="products/edit/<?php e($id); ?>">Edit</a>
+</p>

@@ -1,0 +1,11 @@
+<?php Buffer::set('title','Delete invoice'); ?>
+<div class="page-header">
+  <h1>Delete invoices</h1>
+</div>
+<?php if (isset($error)): ?><div class="alert alert-danger"><button type="button" class="close">x</button><div><?php e($error); ?></div></div><?php endif; ?>
+<form method="post">
+	<p>Are you sure?</p>
+	<button class="btn btn-danger pull-right" type="submit">Yes</button>
+	<a class="btn btn-primary" href="invoices/view/<?php e($id); ?>">No</a>
+	<?php Session::getCsrfInput(); ?>
+</form>

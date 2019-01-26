@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="<?php e(Router::getBaseUrl());?>">
+    <title><?php Buffer::get('title');?> | InvoiceLion</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="img/icon-196x196.png">
+    <link rel="shortcut icon" sizes="196x196" href="img/icon-196x196.png">
+    <link rel="apple-touch-icon" href="img/homescreenicon.png">
+
+    <link href="css/default.css" rel="stylesheet" type="text/css">
+  </head>
+  <body class="default">
+    <div class="main">
+
+      <div class="content">
+        <a href="/" id="branding"><img src="/img/invoicelion_inverted.png" /><span>InvoiceLion</span></a>
+        <div class="card">
+          <div>
+            <?php Buffer::get('html');?>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <script>
+      var elements = document.querySelectorAll('.alert button');
+      elements.forEach(element => {
+        element.addEventListener("click", function(){
+          element.parentNode.style.display = 'none';
+        }); 
+      });
+    </script>
+</body>
+</html>

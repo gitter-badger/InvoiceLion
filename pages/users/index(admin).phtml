@@ -1,0 +1,21 @@
+<h1>Users</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Password</th>
+      <th>Created</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($data as $row): ?>
+    <tr>
+      <td><span><?php e($row['users']['username']);?></span></td>
+      <td><span><?php e($row['users']['password']);?></span></td>
+      <td><span><?php e($row['users']['created']);?></span></td>
+    </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
+<p><a class="btn-primary" href="users/add">Add user</a></p>

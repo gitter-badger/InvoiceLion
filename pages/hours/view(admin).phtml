@@ -1,0 +1,67 @@
+<div class="page-header">
+  <h2><a href="/">Home</a> / <a href="hours">Hours</a></h2>
+  <h1><?php $data['hours']['name'] ? e($data['hours']['name']) : e('Untitled');?></h1>
+</div>
+<div>
+	<dl>
+		<dt>Project</dt>
+		<dd>
+		  <?php if(isset($projects[$data['hours']['project_id']])) {?>
+			<a href="/projects/view/<?php e($data['hours']['project_id']); ?>"><?php e($projects[$data['hours']['project_id']]); ?></a>
+		  <?php } else { ?>
+			<?php e('-'); ?>
+		  <?php } ?>
+		</dd>
+  </dl>
+	<dl>
+		<dt>Customer</dt>
+		<dd>
+		  <?php if(isset($customers[$data['hours']['customer_id']])) {?>
+			<a href="/customers/view/<?php e($data['hours']['customer_id']); ?>"><?php e($customers[$data['hours']['customer_id']]); ?></a>
+		  <?php } else { ?>
+			<?php e('-'); ?>
+		  <?php } ?>
+		</dd>
+  </dl>
+
+	<dl>
+		<dt>Date</dt>
+  	<dd><?php e($data['hours']['date']);?></dd>
+  </dl>
+
+	<dl>
+		<dt>Number of hours</dt>
+  	<dd><?php $data['hours']['hours_worked'] ? e($data['hours']['hours_worked']) : e('-'); ?></dd>
+  </dl>
+
+	<dl>
+		<dt>Hourly fee</dt>
+  	<dd><?php $data['hours']['hourly_fee'] ? e($data['hours']['hourly_fee']) : e('-'); ?></dd>
+  </dl>
+
+	<dl>
+		<dt>VAT percentage</dt>
+  	<dd><?php $data['hours']['vat_percentage'] ? e($data['hours']['vat_percentage']) : e('-'); ?></dd>
+  </dl>
+	
+	<dl>
+		<dt>Subtotal (euro)</dt>
+  	<dd><?php $data['hours']['subtotal'] ? e($data['hours']['subtotal']) : e('-'); ?></dd>
+  </dl>
+
+	<dl>
+		<dt>Hour type</dt>
+  	<dd><?php e($hourtypes[$data['hours']['type']]);?></dd>
+ 	</dl>
+
+	<?php if($data['hours']['comment']) { ?>
+		<dl>
+			<dt>Text</dt>
+			<dd><?php e($data['hours']['comment']);?></dd>
+		</dl>
+	<?php } ?>
+</div>
+<p>
+	<a class="btn btn-danger pull-right" href="hours/delete/<?php e($id); ?>">Delete</a>
+	<a class="btn btn-primary" href="hours/edit/<?php e($id); ?>">Edit</a>
+</p>

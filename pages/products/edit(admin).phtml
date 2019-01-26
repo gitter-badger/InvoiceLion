@@ -1,0 +1,17 @@
+<div class="page-header">
+  <h1>Edit products</h1>
+</div>
+<?php if (isset($error)): ?><div class="alert alert-danger"><button type="button" class="close">x</button><div><?php e($error); ?></div></div><?php endif; ?>
+<form method="post">
+  
+	<div class="form-group <?php e(isset($errors['products[name]'])?'has-error':''); ?>">
+		<label class="control-label" for="products[name]">Name</label>
+		<input class="form-control" name="products[name]" type="text" value="<?php e($data['products']['name']); ?>" id="products[name]" />
+		<span class="help-block"><?php if (isset($errors['products[name]'])) e($errors['products[name]']); ?></span>
+	</div>
+
+	<div class="form-group">
+		<button class="btn btn-primary" type="submit">Save</button>
+	</div>
+	<?php Session::getCsrfInput(); ?>
+</form> 

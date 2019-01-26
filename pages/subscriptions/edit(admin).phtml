@@ -1,0 +1,86 @@
+<div class="page-header">
+  <h1>Edit subscriptions</h1>
+</div>
+<?php if (isset($error)): ?><div class="alert alert-danger"><button type="button" class="close">x</button><div><?php e($error); ?></div></div><?php endif; ?>
+<form method="post">
+  
+	<div class="form-group <?php e(isset($errors['subscriptions[project_id]'])?'has-error':''); ?>">
+		<label class="control-label" for="subscriptions[project_id]">Project</label>
+		<select class="form-control" name="subscriptions[project_id]" id="subscriptions[project_id]" onchange="document.getElementById('subscriptions[customer_id]').value = this.options[this.selectedIndex].getAttribute('customer-value');">
+			<option value=""<?php e(''==$data['subscriptions']['project_id']?' selected="selected"':''); ?>></option>
+			<?php foreach ($projects as $project): ?>
+			<option value="<?php e($project['projects']['id']); ?>" customer-value="<?php e($project['projects']['customer_id']); ?>"<?php e($project['projects']['id']==$data['subscriptions']['project_id']?' selected="selected"':''); ?>><?php e($project['projects']['name']); ?></option>
+			<?php endforeach; ?>
+		</select>
+		<span class="help-block"><?php if (isset($errors['subscriptions[project_id]'])) e($errors['subscriptions[project_id]']); ?></span>
+	</div>
+
+	<div class="form-group <?php e(isset($errors['subscriptions[customer_id]'])?'has-error':''); ?>">
+		<label class="control-label" for="subscriptions[customer_id]">Customer</label>
+		<select class="form-control" name="subscriptions[customer_id]" id="subscriptions[customer_id]">
+			<option value=""<?php e(''==$data['subscriptions']['customer_id']?' selected="selected"':''); ?>></option>
+			<?php foreach ($customers as $key => $value): ?>
+			<option value="<?php e($key); ?>"<?php e($key==$data['subscriptions']['customer_id']?' selected="selected"':''); ?>><?php e($value); ?></option>
+			<?php endforeach; ?>
+		</select>
+		<span class="help-block"><?php if (isset($errors['subscriptions[customer_id]'])) e($errors['subscriptions[customer_id]']); ?></span>
+	</div>
+
+	<div class="form-group <?php e(isset($errors['subscriptions[fee]'])?'has-error':''); ?>">
+		<label class="control-label" for="subscriptions[fee]">Fee (euro)</label>
+		<input class="form-control" name="subscriptions[fee]" type="number" step="0.01" value="<?php e($data['subscriptions']['fee']); ?>" id="subscriptions[fee]" />
+		<span class="help-block"><?php if (isset($errors['subscriptions[fee]'])) e($errors['subscriptions[fee]']); ?></span>
+	</div>
+  
+	<div class="form-group <?php e(isset($errors['subscriptions[vat_percentage]'])?'has-error':''); ?>">
+		<label class="control-label" for="subscriptions[vat_percentage]">VAT percentage</label>
+		<input class="form-control" name="subscriptions[vat_percentage]" type="number" step="0.01" value="<?php e($data['subscriptions']['vat_percentage']); ?>" id="subscriptions[vat_percentage]" />
+		<span class="help-block"><?php if (isset($errors['subscriptions[vat_percentage]'])) e($errors['subscriptions[vat_percentage]']); ?></span>
+	</div>
+
+	<div class="form-group <?php e(isset($errors['subscriptions[months]'])?'has-error':''); ?>">
+		<label class="control-label" for="subscriptions[months]">Period duration (months)</label>
+		<input class="form-control" name="subscriptions[months]" type="number" value="<?php e($data['subscriptions']['months']); ?>" id="subscriptions[months]" />
+		<span class="help-block"><?php if (isset($errors['subscriptions[months]'])) e($errors['subscriptions[months]']); ?></span>
+	</div>
+  
+	<div class="form-group <?php e(isset($errors['subscriptions[name]'])?'has-error':''); ?>">
+		<label class="control-label" for="subscriptions[name]">Name</label>
+		<input class="form-control" name="subscriptions[name]" type="text" value="<?php e($data['subscriptions']['name']); ?>" id="subscriptions[name]" />
+		<span class="help-block"><?php if (isset($errors['subscriptions[name]'])) e($errors['subscriptions[name]']); ?></span>
+	</div>
+  
+	<div class="form-group <?php e(isset($errors['subscriptions[from]'])?'has-error':''); ?>">
+		<label class="control-label" for="subscriptions[from]">From</label>
+		<input class="form-control" name="subscriptions[from]" type="date" value="<?php e($data['subscriptions']['from']); ?>" id="subscriptions[from]" />
+		<span class="help-block"><?php if (isset($errors['subscriptions[from]'])) e($errors['subscriptions[from]']); ?></span>
+	</div>
+  
+	<div class="form-group <?php e(isset($errors['subscriptions[canceled]'])?'has-error':''); ?>">
+		<label class="control-label" for="subscriptions[canceled]">Canceled</label>
+		<input class="form-control" name="subscriptions[canceled]" type="date" value="<?php e($data['subscriptions']['canceled']); ?>" id="subscriptions[canceled]" />
+		<span class="help-block"><?php if (isset($errors['subscriptions[canceled]'])) e($errors['subscriptions[canceled]']); ?></span>
+	</div>
+  
+	<div class="form-group <?php e(isset($errors['subscriptions[comment]'])?'has-error':''); ?>">
+		<label class="control-label" for="subscriptions[comment]">Comment</label>
+		<textarea class="form-control" name="subscriptions[comment]" type="text" id="subscriptionscommentt]"><?php e($data['subscriptions']['comment']); ?></textarea>
+		<span class="help-block"><?php if (isset($errors['subscriptions[comment]'])) e($errors['subscriptions[comment]']); ?></span>
+	</div>
+  
+	<div class="form-group <?php e(isset($errors['subscriptions[subscriptiontype_id]'])?'has-error':''); ?>">
+		<label class="control-label" for="subscriptions[subscriptiontype_id]">Subscription type</label>
+		<select class="form-control" name="subscriptions[subscriptiontype_id]" id="subscriptions[subscriptiontype_id]">
+			<option value=""<?php e(''==$data['subscriptions']['subscriptiontype_id']?' selected="selected"':''); ?>></option>
+			<?php foreach ($subscriptiontypes as $key => $value): ?>
+			<option value="<?php e($key); ?>"<?php e($key==$data['subscriptions']['subscriptiontype_id']?' selected="selected"':''); ?>><?php e($value); ?></option>
+			<?php endforeach; ?>
+		</select>
+		<span class="help-block"><?php if (isset($errors['subscriptions[subscriptiontype_id]'])) e($errors['subscriptions[subscriptiontype_id]']); ?></span>
+	</div>
+
+	<div class="form-group">
+		<button class="btn btn-primary" type="submit">Save</button>
+	</div>
+	<?php Session::getCsrfInput(); ?>
+</form> 

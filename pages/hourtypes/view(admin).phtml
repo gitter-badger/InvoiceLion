@@ -1,0 +1,15 @@
+<div class="page-header">
+	<h2><a href="/">Home</a></h2>
+  <h1><?php e($data['hourtypes']['name']);?></h1>
+</div>
+<div>
+	<dl>
+		<dt>Name</dt>
+  		<dd><?php e($data['hourtypes']['name']);?></dd>
+ 
+  	</dl>
+</div>
+<p>
+	<a class="btn btn-danger pull-right" href="hourtypes/delete/<?php e($id); ?>">Delete</a>
+	<a class="btn btn-primary" href="hourtypes/edit/<?php e($id); ?>">Edit</a>
+</p>

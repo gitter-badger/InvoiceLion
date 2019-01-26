@@ -1,0 +1,103 @@
+<?php Buffer::set('title','View invoice'); ?>
+<div class="page-header">
+	<h2><a href="/">Home</a> / <a href="invoices">Invoices</a></h2>
+  	<h1><?php if(isset(explode(" - ",$data['invoices']['name'])[1])) e(explode(" - ",$data['invoices']['name'])[1]); else e($data['invoices']['name']); ?></h1>
+</div>
+<div>
+	<dl>
+		<dt>Number</dt>
+  		<dd><?php e($data['invoices']['number']);?></dd>
+   	</dl>
+	<dl>
+		<dt>Date</dt>
+  		<dd><?php e($data['invoices']['date']);?></dd>
+ 	</dl>
+	<dl>
+		<dt>Customer</dt>
+  		<dd><a href="/customers/view/<?php e($data['invoices']['customer_id']); ?>"><?php e($customers[$data['invoices']['customer_id']]);?></a></dd>
+	</dl>
+	<dl>
+		<dt>Sent</dt>
+  		<dd><?php if($data['invoices']['sent']) e('yes'); else e('no'); ?></dd>
+	</dl>  
+	<?php if($data['invoices']['sent']) { ?>
+		<dl>
+			<dt>Paid</dt>
+			<dd><?php if($data['invoices']['paid']) e('yes'); else e('no'); ?></dd>
+		</dl>
+		<?php if($data['invoices']['reminder1']) {?>
+			<dl>
+				<dt>Reminder 1</dt>
+				<dd><?php if($data['invoices']['reminder1']) e($data['invoices']['reminder1']); else e('-'); ?></dd>
+			</dl>
+			<dl>
+				<dt>Reminder 2</dt>
+				<dd><?php if($data['invoices']['reminder1']) e($data['invoices']['reminder2']); else e('-'); ?></dd>
+			</dl>
+	   	<?php } ?>   
+	<?php } ?>
+</div>
+
+<br />
+
+<table class="table">
+	<thead>
+		<tr>
+			<th class="name" colspan="2">Invoice lines</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($invoicelines as $row): ?>
+		<tr class="hover" onclick="window.location.href='invoicelines/view/<?php e($row['invoicelines']['id']);?>';">
+			<td class="name"><span><?php e($row['invoicelines']['name']);?></span></td>
+			<td class="money"><span><?php e($row['invoicelines']['subtotal']);?></span></td>
+		</tr>
+		<?php endforeach; ?>
+	</tbody>
+</table>
+
+<br /><br />
+
+<div>
+	<dl>
+		<dt>Subtotal</dt>
+  		<dd><?php e($data['invoices']['subtotal']);?></dd>
+   	</dl>
+	<dl>
+		<dt>VAT</dt>
+  		<dd><?php if($data['invoices']['vat']!==null) e($data['invoices']['vat']); else e('-'); ?></dd>
+ 	</dl>
+	 <dl>
+		<dt>Total</dt>
+  		<dd><?php e($data['invoices']['total']);?></dd>
+ 	</dl>
+</div>
+
+<br /><br />
+
+<p>
+	<p class="pull-right">
+		<a class="btn btn-danger" href="invoices/delete/<?php e($id); ?>">Delete</a>
+		<?php if($data['invoices']['sent']) { ?>
+			<a class="btn btn-default" href="invoices/edit/<?php e($id); ?>">Edit</a>
+		<?php } else { ?>
+			<a class="btn btn-default" href="invoices/send/<?php e($id); ?>">Send</a>
+		<?php } ?>
+	</p>
+	<?php if(!$data['invoices']['sent']) { ?>
+		<a class="btn btn-primary" href="invoices/edit/<?php e($id); ?>">Edit</a>
+	<?php } ?>
+	<a class="btn btn-<?php $data['invoices']['sent'] ? e('primary') : e('default'); ?>" href="invoices/download/<?php e($id); ?>">Download</a>
+	<?php if($data['invoices']['sent'] && (!$data['invoices']['paid'] || $data['invoices']['reminder1'] || $data['invoices']['reminder2'])) { ?>
+		<a class="btn btn-default" href="invoices/download/<?php e($id); ?>/1">Download 1st Reminder</a>
+		<?php if(!$data['invoices']['reminder1']) {?>
+			<a class="btn btn-primary" href="send/download/<?php e($id); ?>/1">Send 1st Reminder</a>
+		<?php } ?>
+		<?php if($data['invoices']['reminder1']) {?>
+			<a class="btn btn-default" href="invoices/download/<?php e($id); ?>/2">Download 2nd Reminder</a>
+			<?php if(!$data['invoices']['reminder2']) {?>
+				<a class="btn btn-primary" href="send/download/<?php e($id); ?>/1">Send 1st Reminder</a>
+			<?php } ?>
+		<?php } ?>
+	<?php } ?>
+</p>

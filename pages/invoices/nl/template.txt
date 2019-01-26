@@ -1,0 +1,130 @@
+<table id="address"><tr><td>
+    <br>
+    <br>
+    <br>
+    {{customer.name}}<br>
+    t.a.v. {{customer.contact}}<br>
+    {{customer.address|convertLines}}<br>
+    <br>
+    <br>
+    <br>
+</td><td>
+    <img id="logo" src="data:image/png;base64,{{company.logo_image|encodeBase64}}" /><br>
+    {{company.address|convertLines}}<br>
+    Tel: {{company.phone}}<br>
+    IBAN: {{company.bank_account_number}}<br>
+    t.n.v. {{company.bank_account_name}}<br>
+    BIC: {{company.bank_bic}}<br>
+    Kvk: {{company.coc_number}}<br>
+    BTW: {{company.vat_number}}<br>                
+</td></tr></table>
+<br>
+<br>
+<br>
+{{if:invoice.reminder|eq(0)}}
+    <b>Datum:</b> {{invoice.date}}<br>
+    <b>Factuurnummer:</b> {{invoice.number}}<br>
+    <b>Betreft:</b> {{invoice.name}}<br>
+{{endif}}
+{{if:invoice.reminder|eq(1)}}
+    <b>Datum:</b> {{now|formatDate(j F Y)|translateMonth(nl)}}<br>
+    <br>
+    <table id="warning"><tr><td><b>HERINNERING</b></td></tr></table>
+    <br>
+    <b>Factuurdatum:</b> {{invoice.date}}<br>
+    <b>Factuurnummer:</b> {{invoice.number}}<br>
+    <b>Betreft:</b> {{invoice.name}}<br>
+{{endif}}
+{{if:invoice.reminder|eq(2)}}
+    <b>Datum:</b> {{now|formatDate(j F Y)|translateMonth(nl)}}<br>
+    <br>
+    <table id="warning"><tr><td><b>TWEEDE EN LAATSTE HERINNERING</b></td></tr></table>
+    <br>
+    <b>Factuurdatum:</b> {{invoice.date}}<br>
+    <b>Factuurnummer:</b> {{invoice.number}}<br>
+    <b>Betreft:</b> {{invoice.name}}<br>
+{{endif}}
+<br>
+<br>
+<br>
+<b>Factuurgegevens:</b><br>
+<table id="lines">
+{{for:line:lines}}
+    <tr><td>
+        {{line.name|capitalize}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td><td>
+        € 
+    </td><td>
+        {{line.subtotal|formatNumber(2,44,0)}}
+    </td></tr>
+{{endfor}}
+{{if:invoice.multiLine}}
+    <tr><td>
+        &nbsp;
+    </td><td>
+        Subtotaal&nbsp;&nbsp;&nbsp;€ 
+    </td><td class="sum">
+        {{invoice.subtotal|formatNumber(2,44,0)}}
+    </td></tr>
+{{endif}}
+{{if:customer.vat_reverse_charge}}
+    <tr><td>
+        &nbsp;
+    </td><td>
+            
+    </td><td>
+        BTW VERLEGD
+    </td></tr>
+{{endif}}
+{{if:customer.vat_reverse_charge|eq(0)}}
+    <tr><td>
+        &nbsp;
+    </td><td>
+        21% BTW&nbsp;&nbsp;&nbsp;€ 
+    </td><td>
+        {{invoice.vat|formatNumber(2,44,0)}}
+    </td></tr>
+{{endif}}
+<tr><td>
+    &nbsp;
+</td><td>
+    Totaal&nbsp;&nbsp;&nbsp;€ 
+</td><td class="sum">
+    {{invoice.total|formatNumber(2,44,0)}}
+</td><tr>
+</table>
+<br>
+<br>
+<br>
+{{if:invoice.reminder|eq(0)}}
+    Gelieve het bovenstaande totaalbedrag binnen {{company.payment_period}} dagen te storten op 
+    IBAN {{company.bank_account_number}} ({{company.bank_name}}) <b>t.n.v. {{company.bank_account_name}}</b> 
+    in {{company.bank_city}}, onder vermelding van het factuurnummer.<br>
+{{endif}}
+{{if:invoice.reminder|eq(1)}}
+    Uit onze administratie is gebleken dat bovenstaande factuur nog niet is voldaan. 
+    De betalingstermijn van deze factuur is {{company.payment_period}} dagen. Deze termijn is reeds verstreken.<br>
+    <br>
+    Wij verzoeken u daarom om uiterlijk op <b>{{company.reminder_period|relativeDate|formatDate(j F Y)|translateMonth(nl)}}</b> het
+    openstaande factuurbedrag over gemaakt te hebben op IBAN {{company.bank_account_number}} ({{company.bank_name}}) 
+    <b>t.n.v. {{company.bank_account_name}}</b> in {{company.bank_city}}, onder vermelding van het factuurnummer.<br>
+{{endif}}
+{{if:invoice.reminder|eq(2)}}
+    Uit onze administratie is gebleken dat bovenstaande factuur nog niet is voldaan. 
+    De betalingstermijn van deze factuur is {{company.payment_period}} dagen. Deze termijn is reeds verstreken.<br>
+    <br>
+    Wij verzoeken u daarom om uiterlijk op <b>{{company.reminder_period|relativeDate|formatDate(j F Y)|translateMonth(nl)}}</b> het
+    openstaande factuurbedrag over gemaakt te hebben op IBAN {{company.bank_account_number}} ({{company.bank_name}}) 
+    <b>t.n.v. {{company.bank_account_name}}</b> in {{company.bank_city}}, onder vermelding van het factuurnummer.<br>
+    <br>
+    Mocht uw betaling reeds onderweg zijn, dan verzoeken wij u deze herinnering als niet geschreven te beschouwen.<br>
+{{endif}}
+<br>
+<br>
+<br>
+<br>
+<br>
+Met vriendelijke groet,<br>
+<img id="signature" src="data:image/png;base64,{{company.signature_image|encodeBase64}}" /><br>
+{{company.contact}}<br>
+<table id="footer"><tr><td>Factuurnummer: {{invoice.number}}</td></tr></table>

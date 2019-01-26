@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="<?php e(Router::getBaseUrl());?>">
+    <title><?php Buffer::get('title');?> | InvoiceLion</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="img/icon-196x196.png">
+    <link rel="shortcut icon" sizes="196x196" href="img/icon-196x196.png">
+    <link rel="apple-touch-icon" href="img/homescreenicon.png">
+
+    <link href="css/default.css" rel="stylesheet" type="text/css">
+  </head>
+  <body class="showmenu">
+    <div class="main">
+
+      <div class="content">
+        <?php foreach ($flash as $type=>$text): ?> 
+          <div class="alert alert-<?php e($type); ?>">
+            <button type="button" class="close">x</button>
+            <div>
+              <?php e($text); ?>
+            </div>
+          </div>
+        <?php endforeach; ?>
+   
+        <?php Buffer::get('html');?>
+
+        <div class="nav">
+          <h2>Menu</h2>
+          <a href="/"><span>Dashboard</span></a><br /> 
+          <a href="statistics"><span>Statistics</span></a><br />  
+          <a href="hours"><span>Hours</span></a><br />
+          <a href="invoices"><span>Invoices</span></a><br />
+          <a href="subscriptions"><span>Subscriptions</span></a><br />
+          <a href="customers"><span>Customers</span></a><br />
+          <a href="projects"><span>Projects</span></a><br />
+        </div>
+
+      </div>
+
+      <div class="icons">
+        <div>
+          <a href="/" id="branding" title="InvoiceLion"><span></span></a>
+          <a href="/" title="Dashboard"><img src="/img/icon.svg" /><span>Dashboard</span></a>
+          <a href="statistics" title="Statistics"><img src="/img/chart-bar.svg" /><span>Statistics</span></a>
+          <a href="hours" title="Hours"><img src="/img/clock.svg" /><span>Hours</span></a>
+          <a href="subscriptions" title="Subscriptions"><img src="/img/repeat.svg" /><span>Subscriptions</span></a>
+          <a href="invoices" title="Invoices"><img src="/img/file-invoice-dollar.svg" /><span>Invoices</span></a>
+          <a href="tenants/view/1" title="Settings"><img src="/img/cog.svg" /><span>Settings</span></a>
+
+          <div class="bottom">
+          <?php $username = isset($_SESSION['user']) ? $_SESSION['user']['username'] : false?>
+          <a href="users/view/<?php e($_SESSION['user']['id']); ?>" title="User"><img src="/img/user.svg" /><span>User</span></a> 
+          <a href="auth/logout" title="Logout"><img src="/img/power-off.svg" /><span>Logout "<?php e($username);?>"</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script>
+      var elements = document.querySelectorAll('th[order]');
+      elements.forEach(element => {
+        element.addEventListener("click", function(){
+          document.location.href=element.attributes['order'].nodeValue;
+          if(document.location.href.endsWith(element.attributes['order'].nodeValue)){
+            if(element.attributes['order'].nodeValue.endsWith('/desc')) {
+              document.location.href=element.attributes['order'].nodeValue.replace('/desc','/asc');
+            } else {
+              document.location.href=element.attributes['order'].nodeValue.replace('/asc','/desc');
+            }
+          }
+        }); 
+      });
+
+      var elements = document.querySelectorAll('.alert button');
+      elements.forEach(element => {
+        element.addEventListener("click", function(){
+          element.parentNode.style.display = 'none';
+        }); 
+      });
+    </script>
+
+  </body>
+</html>

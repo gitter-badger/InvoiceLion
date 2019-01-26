@@ -1,0 +1,35 @@
+<div class="page-header">
+	<h2><a href=".">Home</a> / <a href="subscriptiontypes">Subscription types</a></h2>
+  <h1><?php e($data['subscriptiontypes']['name']);?></h1>
+</div>
+<div>
+		<dt>Text</dt>
+  		<dd><?php e($data['subscriptiontypes']['comment']);?></dd>
+  	</dl>
+</div>
+
+<br />
+
+<table class="table">
+	<thead>
+		<tr>
+			<th class="name">Subscriptions</th>
+			<th class="money">Subtotal</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($subscriptions as $row): ?>
+		<tr class="hover" onclick="window.location.href='subscriptions/view/<?php e($row['subscriptions']['id']);?>';">
+			<td class="name"><span><?php e($row['subscriptions']['name']);?></span></td>
+			<td class="money"><span><?php e($row['subscriptions']['fee']);?></span></td>
+		</tr>
+		<?php endforeach; ?>
+	</tbody>
+</table>
+
+<br /><br />
+
+<p>
+	<a class="btn btn-danger pull-right" href="subscriptiontypes/delete/<?php e($id); ?>">Delete</a>
+	<a class="btn btn-primary" href="subscriptiontypes/edit/<?php e($id); ?>">Edit</a>
+</p>

@@ -1,0 +1,53 @@
+<?php Buffer::set('title','View Customer'); ?>
+<div class="page-header">
+	<h2><a href="/">Home</a> / <a href="customers">Customers</a></h2>
+	<h1><?php e($data['customers']['name']);?></h1>
+</div>
+<div>
+	<dl>
+		<dt>Email address</dt>
+  		<dd><?php $data['customers']['email'] ? e($data['customers']['email']) : e('-');?></dd>
+ 
+  	</dl>
+	<dl>
+		<dt>Contact</dt>
+  		<dd><?php e($data['customers']['contact']);?></dd>
+ 
+  	</dl>
+	<dl>
+		<dt>Address</dt>
+  		<dd><pre><?php e($data['customers']['address']);?></pre></dd>
+ 
+  	</dl>
+	<dl>
+		<dt>VAT</dt>
+  		<dd><?php if($data['customers']['vat_reverse_charge']) e('no'); else e('yes'); ?></dd>
+ 
+  	</dl>
+</div>
+
+<br />
+
+<table class="table">
+	<thead>
+		<tr>
+			<th class="name">Invoices</th>
+			<th class="money">Subtotal</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($invoices as $row): ?>
+		<tr class="hover" onclick="window.location.href='invoices/view/<?php e($row['invoices']['id']);?>';">
+			<td class="name"><span><?php e($row['invoices']['name']);?></span></td>
+			<td class="money"><span><?php e($row['invoices']['subtotal']);?></span></td>
+		</tr>
+		<?php endforeach; ?>
+	</tbody>
+</table>
+
+<br /><br />
+
+<p>
+	<a class="btn btn-danger pull-right" href="customers/delete/<?php e($id); ?>">Delete</a>
+	<a class="btn btn-primary" href="customers/edit/<?php e($id); ?>">Edit</a>
+</p>

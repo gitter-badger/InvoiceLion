@@ -1,0 +1,23 @@
+<?php Buffer::set('title','Projects'); ?>
+<h2><a href="/">Home</a></h2>
+<h1>Projects <a href="projects/add" class="btn-primary">Add project</a></h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th class="name <?php if($order=='name') e('selected'); ?>" order="/projects/name/asc">Name</th>
+      <th class="<?php if($order=='customer_id') e('selected'); ?>" order="/projects/customer_id/asc">Customer</th>
+      <th class="bool <?php if($order=='active') e('selected'); ?>" order="/projects/active/asc">Active</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($data as $row): ?>
+    <tr class="hover" onclick="window.location.href='projects/view/<?php e($row['projects']['id']);?>';">
+      <td class="name"><span><?php e($row['projects']['name']);?></span></td>
+      <td><span><a href="customers/view/<?php e($row['projects']['customer_id']); ?>"><?php e($customers[$row['projects']['customer_id']]);?></a></span></td>
+      <td class="bool"><span><?php if ($row['projects']['active']) e('yes'); else e('no');?></span></td>
+    </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
+<p><a class="btn-primary" href="projects/add">Add project</a></p>

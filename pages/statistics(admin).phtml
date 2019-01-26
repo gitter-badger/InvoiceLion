@@ -1,0 +1,37 @@
+<?php Buffer::set('title','Statistics'); ?>
+<h2>Home</h2>
+<h1>Statistics</h1>
+
+<p>You currently receive &euro; <?php e(round($subscriptionIncome)); ?> per month from subscriptions.<br />In total you have received &euro; <?php e(round($incomeThisYear)); ?> this year. You are expected to receive an additional &euro; <?php e(round($incomeThisYearAddon)); ?>.<p>
+
+<p>Last year you received &euro; <?php e(round($incomeLastYear)); ?>. Note that all these amounts are without VAT.</p>
+
+<div class="card col50">
+<table>
+    <tr>
+        <th class="name" colspan="3">Hours this year (<?php e(round($totalhours_thisyear)); ?>)</th>
+    </tr>
+    <?php foreach ($sumhourspertype_thisyear as $name=>$sum): ?>
+        <tr>
+            <td class="precentage"><span><?php e(round($sum/$totalhours_thisyear*100)); ?>%</span></td>
+            <td><span><?php if($name) e($name); else e('Other'); ?></span></td>
+            <td><span><?php e(round($sum)); ?> hours</span></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+</div>
+
+<div class="card col50">
+<table>
+    <tr>
+        <th class="name" colspan="3">Hours last year (<?php e(round($totalhours_lastyear)); ?>)</th>
+    </tr>
+    <?php foreach ($sumhourspertype_lastyear as $name=>$sum): ?>
+        <tr>
+            <td class="precentage"><span><?php e(round($sum/$totalhours_lastyear*100)); ?>%</span></td>
+            <td><span><?php if($name) e($name); else e('Other'); ?></span></td>
+            <td><span><?php e(round($sum)); ?> hours</span></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+</div>

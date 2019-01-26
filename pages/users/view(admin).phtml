@@ -1,0 +1,26 @@
+<?php Buffer::set('title','View user'); ?>
+<div class="page-header">
+	<h2><a href="/">Home</a> / <a href="users">Users</a></h2>
+  	<h1>View user</h1>
+</div>
+<div>
+	<dl>
+		<dt>Username</dt>
+  		<dd><?php e($data['users']['username']);?></dd>
+ 
+  	</dl>
+	<dl>
+		<dt>Password</dt>
+  		<dd><?php e($data['users']['password']);?></dd>
+ 
+  	</dl>
+	<dl>
+		<dt>Created</dt>
+  		<dd><?php e($data['users']['created']);?></dd>
+ 
+  	</dl>
+</div>
+<p>
+	<a class="btn btn-danger pull-right" href="users/delete/<?php e($id); ?>">Delete</a>
+	<a class="btn btn-primary" href="users/edit/<?php e($id); ?>">Edit</a>
+</p>

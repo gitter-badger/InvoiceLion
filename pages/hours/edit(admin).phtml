@@ -1,0 +1,82 @@
+<div class="page-header">
+	<h2><a href="/">Home</a> / <a href="hours">Hours</a></h2>
+  	<h1>Edit hours</h1>
+</div>
+<?php if (isset($error)): ?><div class="alert alert-danger"><button type="button" class="close">x</button><div><?php e($error); ?></div></div><?php endif; ?>
+<form method="post">
+	<div class="form-group <?php e(isset($errors['hours[project_id]'])?'has-error':''); ?>">
+		<label class="control-label" for="hours[project_id]">Project</label>
+		<select class="form-control" name="hours[project_id]" id="hours[project_id]" onchange="document.getElementById('hours[customer_id]').value = this.options[this.selectedIndex].getAttribute('customer-value');">
+			<option value=""<?php e(''==$data['hours']['project_id']?' selected="selected"':''); ?>></option>
+			<?php foreach ($projects as $project): ?>
+			<option value="<?php e($project['projects']['id']); ?>" customer-value="<?php e($project['projects']['customer_id']); ?>"<?php e($project['projects']['id']==$data['hours']['project_id']?' selected="selected"':''); ?>><?php e($project['projects']['name']); ?></option>
+			<?php endforeach; ?>
+		</select>
+		<span class="help-block"><?php if (isset($errors['hours[project_id]'])) e($errors['hours[project_id]']); ?></span>
+	</div>
+
+	<div class="form-group <?php e(isset($errors['hours[customer_id]'])?'has-error':''); ?>">
+		<label class="control-label" for="hours[customer_id]">Customer</label>
+		<select class="form-control" name="hours[customer_id]" id="hours[customer_id]">
+			<option value=""<?php e(''==$data['hours']['customer_id']?' selected="selected"':''); ?>></option>
+			<?php foreach ($customers as $key => $value): ?>
+			<option value="<?php e($key); ?>"<?php e($key==$data['hours']['customer_id']?' selected="selected"':''); ?>><?php e($value); ?></option>
+			<?php endforeach; ?>
+		</select>
+		<span class="help-block"><?php if (isset($errors['hours[customer_id]'])) e($errors['hours[customer_id]']); ?></span>
+	</div>
+
+	<div class="form-group <?php e(isset($errors['hours[date]'])?'has-error':''); ?>">
+		<label class="control-label" for="hours[date]">Date</label>
+		<input class="form-control" name="hours[date]" type="date" value="<?php e($data['hours']['date']); ?>" id="hours[date]" />
+		<span class="help-block"><?php if (isset($errors['hours[date]'])) e($errors['hours[date]']); ?></span>
+	</div>
+
+	<div class="form-group <?php e(isset($errors['hours[hours_worked]'])?'has-error':''); ?>">
+		<label class="control-label" for="hours[hours_worked]">Number of hours</label>
+		<input class="form-control" name="hours[hours_worked]" type="number" step="0.25" value="<?php e($data['hours']['hours_worked']); ?>" id="hours[hours_worked]" />
+		<span class="help-block"><?php if (isset($errors['hours[hours_worked]'])) e($errors['hours[hours_worked]']); ?></span>
+	</div>
+
+	<div class="form-group <?php e(isset($errors['hours[hourly_fee]'])?'has-error':''); ?>">
+		<label class="control-label" for="hours[hourly_fee]">Hourly fee</label>
+		<input class="form-control" name="hours[hourly_fee]" type="number" step="0.01" value="<?php e($data['hours']['hourly_fee']); ?>" id="hours[hourly_fee]" />
+		<span class="help-block"><?php if (isset($errors['hours[hourly_fee]'])) e($errors['hours[hourly_fee]']); ?></span>
+	</div>
+
+	<div class="form-group <?php e(isset($errors['hours[vat_percentage]'])?'has-error':''); ?>">
+		<label class="control-label" for="hours[vat_percentage]">VAT percentage</label>
+		<input class="form-control" name="hours[vat_percentage]" type="number" step="0.01" value="<?php e($data['hours']['vat_percentage']); ?>" id="hours[vat_percentage]" />
+		<span class="help-block"><?php if (isset($errors['hours[vat_percentage]'])) e($errors['hours[vat_percentage]']); ?></span>
+	</div>
+
+	<div class="form-group <?php e(isset($errors['hours[name]'])?'has-error':''); ?>">
+		<label class="control-label" for="hours[name]">Name</label>
+		<input class="form-control" name="hours[name]" type="text" value="<?php e($data['hours']['name']); ?>" id="hours[name]" />
+		<span class="help-block"><?php if (isset($errors['hours[name]'])) e($errors['hours[name]']); ?></span>
+	</div>
+
+	<?php if($hourtypes) { ?>
+	<div class="form-group <?php e(isset($errors['hours[type]'])?'has-error':''); ?>">
+		<label class="control-label" for="hours[type]">Hour type</label>
+		<select class="form-control" name="hours[type]" id="hours[type]">
+			<option value=""<?php e(''==$data['hours']['type']?' selected="selected"':''); ?>></option>
+			<?php foreach ($hourtypes as $key => $value): ?>
+			<option value="<?php e($key); ?>"<?php e((($key==$data['hours']['type']) || (!$data['hours']['type'] && $value=='Productie'))?' selected="selected"':''); ?>><?php e($value); ?></option>
+			<?php endforeach; ?>
+		</select>
+		<span class="help-block"><?php if (isset($errors['hours[type]'])) e($errors['hours[type]']); ?></span>
+	</div>
+	<?php } ?>
+  
+	<div class="form-group <?php e(isset($errors['hours[comment]'])?'has-error':''); ?>">
+		<label class="control-label" for="hours[comment]">Comment</label>
+		<textarea id="hours[comment]" class="form-control" name="hours[comment]"><?php e($data['hours']['comment']); ?></textarea>
+		<span class="help-block"><?php if (isset($errors['hours[comment]'])) e($errors['hours[comment]']); ?></span>
+	</div>
+
+	<div class="form-group">
+		<button class="btn btn-primary" type="submit">Save</button>
+	</div>
+	<?php Session::getCsrfInput(); ?>
+</form> 

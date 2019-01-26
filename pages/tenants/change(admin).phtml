@@ -1,0 +1,24 @@
+<?php Buffer::set('title','Settings'); ?>
+<h1>Change <?php e(str_replace('_',' ',$field)); ?></h1>
+
+
+<div>
+    <dl>
+        <dt>Current <?php e(str_replace('_',' ',$field)); ?></dt>
+        <dd><img style="height: <?php e($height); ?>em;" src="data:image/png;base64,<?php e(base64_encode($data['tenants'][$field]));?>" /></dd>
+    </dl>
+</div>
+
+<form method="post" enctype="multipart/form-data">
+
+    <div class="form-group <?php e(isset($errors['image'])?'has-error':''); ?>">
+    <label class="control-label" for="image">New <?php e(str_replace('_',' ',$field)); ?></label>
+    <input class="form-control" name="image" type="file" id="image" />
+    <button class="btn btn-default" type="submit">Upload</button>
+	<span class="help-block"><?php if (isset($errors['image'])) e($errors['image']); ?></span>
+    </div>
+    
+    <?php Session::getCsrfInput(); ?>
+</form>
+
+<a class="btn btn-primary" href="tenants/view">Back</a>

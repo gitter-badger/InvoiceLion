@@ -1,0 +1,47 @@
+<div class="page-header">
+  <h2><a href="/">Home</a> / <a href="invoicelines">Invoicelines</a></h2>
+  <h1><?php $data['invoicelines']['name'] ? e($data['invoicelines']['name']) : e('Untitled');?></h1>
+</div>
+<div>
+    <dl>
+		<dt>Customer</dt>
+		<dd>
+		  <?php if(isset($customers[$data['invoicelines']['customer_id']])) {?>
+			<a href="/customers/view/<?php e($data['invoicelines']['customer_id']); ?>"><?php e($customers[$data['invoicelines']['customer_id']]); ?></a>
+		  <?php } else { ?>
+			<?php e('-'); ?>
+		  <?php } ?>
+		</dd>
+    </dl>
+
+	<dl>
+		<dt>Invoice</dt>
+		<dd>
+		  <?php if(isset($invoices[$data['invoicelines']['invoice_id']])) {?>
+			<a href="/invoices/view/<?php e($data['invoicelines']['invoice_id']); ?>"><?php e($invoices[$data['invoicelines']['invoice_id']]); ?></a>
+		  <?php } else { ?>
+			<?php e('-'); ?>
+		  <?php } ?>
+		</dd>
+    </dl>
+
+	<dl>
+		<dt>Subtotal (euro)</dt>
+  	    <dd><?php $data['invoicelines']['subtotal'] ? e($data['invoicelines']['subtotal']) : e('-'); ?></dd>
+    </dl>
+
+	<dl>
+		<dt>VAT percentage</dt>
+  	    <dd><?php $data['invoicelines']['vat_percentage'] ? e($data['invoicelines']['vat_percentage']) : e('-'); ?></dd>
+    </dl>
+
+	<dl>
+		<dt>Total (euro)</dt>
+  	    <dd><?php $data['invoicelines']['total'] ? e($data['invoicelines']['total']) : e('-'); ?></dd>
+    </dl>
+
+</div>
+<p>
+	<a class="btn btn-danger pull-right" href="invoicelines/delete/<?php e($id); ?>">Delete</a>
+	<a class="btn btn-primary" href="invoicelines/edit/<?php e($id); ?>">Edit</a>
+</p>

@@ -1,0 +1,17 @@
+<h1>products</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($data as $row): ?>
+    <tr>
+      <td><span><?php e($row['products']['name']);?></span></td>
+    </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
+<p><a class="btn-primary" href="products/add">Add products</a></p>

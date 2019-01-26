@@ -1,0 +1,20 @@
+<h2><a href=".">Home</a></h2>
+<h1>Subscription types</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($data as $row): ?>
+    <tr class="hover" onclick="window.location.href='subscriptiontypes/view/<?php e($row['subscriptiontypes']['id']);?>';">
+      <td><span><?php e($row['subscriptiontypes']['name']);?></span></td>
+      <td><span><?php e($row['subscriptiontypes']['comment']);?></span></td>
+    </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
+<p><a class="btn-primary" href="subscriptiontypes/add">Add abonnementtype</a></p>
