@@ -13,3 +13,4 @@ config/config.php
 syncdb.sh
 /pages/offers/
 /pdfimages/
+/tests/vendor

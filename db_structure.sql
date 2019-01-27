@@ -1,4 +1,4 @@
--- Adminer 4.7.0 MySQL dump
+-- Adminer 4.7.1 MySQL dump
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -10,10 +10,10 @@ CREATE TABLE `customers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tenant_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `contact` varchar(255) NOT NULL,
-  `address` text NOT NULL,
-  `vat_reverse_charge` tinyint(1) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `contact` varchar(255) DEFAULT NULL,
+  `address` text,
+  `vat_reverse_charge` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `tenant_id` (`tenant_id`),
   CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`tenant_id`) REFERENCES `tenants` (`id`)
@@ -21,6 +21,30 @@ CREATE TABLE `customers` (
 
 
 SET NAMES utf8mb4;
+
+DROP TABLE IF EXISTS `deliveries`;
+CREATE TABLE `deliveries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tenant_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `project_id` int(11) DEFAULT NULL,
+  `date` date NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `subtotal` decimal(10,2) DEFAULT NULL,
+  `vat_percentage` decimal(10,2) DEFAULT NULL,
+  `comment` text,
+  `invoiceline_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `customer_id` (`customer_id`),
+  KEY `project_id` (`project_id`),
+  KEY `invoiceline_id` (`invoiceline_id`),
+  KEY `tenant_id` (`tenant_id`),
+  CONSTRAINT `deliveries_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
+  CONSTRAINT `deliveries_ibfk_3` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`),
+  CONSTRAINT `deliveries_ibfk_4` FOREIGN KEY (`invoiceline_id`) REFERENCES `invoicelines` (`id`),
+  CONSTRAINT `deliveries_ibfk_5` FOREIGN KEY (`tenant_id`) REFERENCES `tenants` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 DROP TABLE IF EXISTS `hours`;
 CREATE TABLE `hours` (
@@ -160,7 +184,7 @@ CREATE TABLE `projects` (
   `tenant_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `customer_id` int(11) NOT NULL,
-  `active` tinyint(1) NOT NULL,
+  `active` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `customer_id` (`customer_id`),
   KEY `tenant_id` (`tenant_id`),
@@ -231,18 +255,18 @@ DROP TABLE IF EXISTS `tenants`;
 CREATE TABLE `tenants` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `contact` varchar(255) NOT NULL,
-  `address` text NOT NULL,
+  `contact` varchar(255) DEFAULT NULL,
+  `address` text,
   `email` varchar(255) NOT NULL,
   `invoice_email` varchar(255) NOT NULL,
-  `phone` varchar(255) NOT NULL,
-  `bank_account_number` varchar(255) NOT NULL,
-  `bank_account_name` varchar(255) NOT NULL,
-  `bank_name` varchar(255) NOT NULL,
-  `bank_bic` varchar(255) NOT NULL,
-  `bank_city` varchar(255) NOT NULL,
-  `coc_number` varchar(255) NOT NULL,
-  `vat_number` varchar(255) NOT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `bank_account_number` varchar(255) DEFAULT NULL,
+  `bank_account_name` varchar(255) DEFAULT NULL,
+  `bank_name` varchar(255) DEFAULT NULL,
+  `bank_bic` varchar(255) DEFAULT NULL,
+  `bank_city` varchar(255) DEFAULT NULL,
+  `coc_number` varchar(255) DEFAULT NULL,
+  `vat_number` varchar(255) DEFAULT NULL,
   `default_vat_percentage` decimal(10,2) NOT NULL DEFAULT '21.00',
   `default_hourly_fee` decimal(10,2) NOT NULL DEFAULT '75.00',
   `payment_period` int(11) NOT NULL DEFAULT '30',
@@ -252,6 +276,8 @@ CREATE TABLE `tenants` (
   `invoice_styles` text,
   `invoice_template` text,
   `invoice_page_number` varchar(255) DEFAULT NULL,
+  `hours_active` tinyint(1) NOT NULL DEFAULT '1',
+  `subscriptions_active` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -270,4 +296,4 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 
--- 2019-01-27 18:12:50
+-- 2019-01-27 21:41:24
