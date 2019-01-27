@@ -20,7 +20,7 @@
       <td class="number"><span><?php e($row['subscriptions']['months']);?></span></td>
       <td class="date"><span><?php e($row['subscriptions']['from']);?></span></td>
       <td class="date"><span><?php e($row['subscriptions']['canceled']);?></span></td>
-      <td><span><a href="subscriptiontypes/view/<?php e($row['subscriptions']['subscriptiontype_id']); ?>"><?php e($subscriptiontypes[$row['subscriptions']['subscriptiontype_id']]);?></a></span></td>
+<td><span><?php if($subscriptiontypes) {?><a href="subscriptiontypes/view/<?php e($row['subscriptions']['subscriptiontype_id']); ?>"><?php e($subscriptiontypes[$row['subscriptions']['subscriptiontype_id']]);?></a><?php } ?></span></td>
       <td><span><?php if($row['subscriptions']['customer_id']) { ?><a href="customers/view/<?php e($row['subscriptions']['customer_id']); ?>"><?php e($customers[$row['subscriptions']['customer_id']]);?></a><?php } ?></span></td>
       <td class="money"><span><?php e($row['subscriptions']['fee']);?></span></td>
     </tr>
