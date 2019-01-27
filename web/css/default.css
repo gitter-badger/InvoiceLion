@@ -155,8 +155,9 @@ div + p {padding-top: 15px;}
 
 
 /* form */
+.form-group {max-width: 500px; }
 .form input {margin-bottom: 1em;}
-input, select, textarea {height: 40px; padding: 0 10px; line-height: 40px; background: none; border: 1px solid #ccc; width: calc(100% - 22px); max-width: 500px; font-size: 16px; font-family: 'Roboto', sans-serif;}
+input, select, textarea {height: 40px; padding: 0 10px; line-height: 40px; background: none; border: 1px solid #ccc; width: calc(100% - 22px); font-size: 16px; font-family: 'Roboto', sans-serif;}
 label {
     display: block; 
     font-weight: 700; 
@@ -166,15 +167,17 @@ label {
 label a {float: right; font-weight: 300;}
 table + p {padding-top: 30px;}
 .form-group {margin-bottom: 15px;}
-select {padding: 0 10px; width: calc(100% - 2px); max-width: 522px;}
+select {padding: 0 10px; width: calc(100% - 2px);}
 textarea {height: 200px; line-height: 1.5em; padding-top: 9px; padding-bottom: 9px;}
 input[type="checkbox"] {height: auto; width: auto; max-width: none;}
 th[order] {cursor: pointer;}
 th.selected {text-decoration: underline;}
 .tag {text-decoration: none; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; display: inline-block; padding: 2px 7px; font-size: 85%; margin-right: 2px;}
 input[type="file"] { border:0; padding:0;}
-
-
+.form-group.has-error, .form-group.has-error a {color: red!important;}
+.form-group.has-error input,
+.form-group.has-error select,
+.form-group.has-error textarea {border: 1px solid red;}
 
 
 

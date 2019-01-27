@@ -1,3 +1,4 @@
+<?php Buffer::set('title','Add subscription'); ?>
 <div class="page-header">
   <h2><a href="/">Home</a> / <a href="subscriptions">Subscriptions</a></h2>
   <h1>Add subscription</h1>
@@ -5,6 +6,7 @@
 <?php if (isset($error)): ?><div class="alert alert-danger"><button type="button" class="close">x</button><div><?php e($error); ?></div></div><?php endif; ?>
 <form method="post">
   
+	<?php if($projects) { ?>
 	<div class="form-group <?php e(isset($errors['subscriptions[project_id]'])?'has-error':''); ?>">
 		<label class="control-label" for="subscriptions[project_id]">Project</label>
 		<select class="form-control" name="subscriptions[project_id]" id="subscriptions[project_id]" onchange="document.getElementById('subscriptions[customer_id]').value = this.options[this.selectedIndex].getAttribute('customer-value');">
@@ -15,9 +17,10 @@
 		</select>
 		<span class="help-block"><?php if (isset($errors['subscriptions[project_id]'])) e($errors['subscriptions[project_id]']); ?></span>
 	</div>
+	<?php } ?>
 
 	<div class="form-group <?php e(isset($errors['subscriptions[customer_id]'])?'has-error':''); ?>">
-		<label class="control-label" for="subscriptions[customer_id]">Customer</label>
+		<label class="control-label" for="subscriptions[customer_id]">Customer <a onclick="this.parentNode.nextElementSibling.selectedIndex = 0; this.parentNode.parentNode.nextElementSibling.style.display = 'block'; this.parentNode.parentNode.style.display = 'none'; document.getElementById('subscriptions[add_customer]').focus();">add</a></label>
 		<select class="form-control" name="subscriptions[customer_id]" id="subscriptions[customer_id]">
 			<option value=""<?php e(''==$data['subscriptions']['customer_id']?' selected="selected"':''); ?>></option>
 			<?php foreach ($customers as $key => $value): ?>
@@ -25,6 +28,12 @@
 			<?php endforeach; ?>
 		</select>
 		<span class="help-block"><?php if (isset($errors['subscriptions[customer_id]'])) e($errors['subscriptions[customer_id]']); ?></span>
+	</div>
+
+	<div class="form-group <?php e(isset($errors['subscriptions[add_customer]'])?'has-error':''); ?>" style="display: none;">
+		<label class="control-label" for="subscriptions[add_customer]">Customer <a onclick="this.parentNode.nextElementSibling.value = ''; this.parentNode.parentNode.previousElementSibling.style.display = 'block'; this.parentNode.parentNode.style.display = 'none';">cancel</a></label>
+		<input class="form-control" name="subscriptions[add_customer]" type="text" value="<?php e($data['subscriptions']['add_customer']); ?>" id="subscriptions[add_customer]" />
+		<span class="help-block"><?php if (isset($errors['subscriptions[add_customer]'])) e($errors['subscriptions[add_customer]']); ?></span>
 	</div>
 
 	<div class="form-group <?php e(isset($errors['subscriptions[fee]'])?'has-error':''); ?>">
@@ -57,18 +66,13 @@
 		<span class="help-block"><?php if (isset($errors['subscriptions[from]'])) e($errors['subscriptions[from]']); ?></span>
 	</div>
   
-	<div class="form-group <?php e(isset($errors['subscriptions[canceled]'])?'has-error':''); ?>">
-		<label class="control-label" for="subscriptions[canceled]">Canceled</label>
-		<input class="form-control" name="subscriptions[canceled]" type="date" value="<?php e($data['subscriptions']['canceled']); ?>" id="subscriptions[canceled]" />
-		<span class="help-block"><?php if (isset($errors['subscriptions[canceled]'])) e($errors['subscriptions[canceled]']); ?></span>
-	</div>
-  
 	<div class="form-group <?php e(isset($errors['subscriptions[comment]'])?'has-error':''); ?>">
 		<label class="control-label" for="subscriptions[comment]">Comment</label>
 		<textarea class="form-control" name="subscriptions[comment]" type="text" id="subscriptionscommentt]"><?php e($data['subscriptions']['comment']); ?></textarea>
 		<span class="help-block"><?php if (isset($errors['subscriptions[comment]'])) e($errors['subscriptions[comment]']); ?></span>
 	</div>
-  
+
+	<?php if($subscriptiontypes) { ?>
 	<div class="form-group <?php e(isset($errors['subscriptions[subscriptiontype_id]'])?'has-error':''); ?>">
 		<label class="control-label" for="subscriptions[subscriptiontype_id]">Subscription type</label>
 		<select class="form-control" name="subscriptions[subscriptiontype_id]" id="subscriptions[subscriptiontype_id]">
@@ -79,6 +83,7 @@
 		</select>
 		<span class="help-block"><?php if (isset($errors['subscriptions[subscriptiontype_id]'])) e($errors['subscriptions[subscriptiontype_id]']); ?></span>
 	</div>
+	<?php } ?>
 
 	<div class="form-group">
 		<button class="btn btn-primary" type="submit">Save</button>

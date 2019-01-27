@@ -6,7 +6,7 @@ if (!empty($_POST)) {
 		
 		if($hour['hours']['invoiceline_id']) {
 			//delete the invoiceline if it is not attached to an invoice_id
-			$optional = DB::delete('DELETE FROM `invoicelines` WHERE `tenant_id` = ? AND `id`= ? AND `invoice_id` IS NULL', $_SESSION['user']['tenant_id'], $hour['hours']['invoiceline_id'],$id);
+			$optional = DB::delete('DELETE FROM `invoicelines` WHERE `tenant_id` = ? AND `id`= ? AND `invoice_id` IS NULL', $_SESSION['user']['tenant_id'], $hour['hours']['invoiceline_id']);
 		}
 		
 		if ($rows) {

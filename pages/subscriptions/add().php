@@ -4,9 +4,18 @@ $projects = DB::select('select `id`,`name`,`customer_id` from `projects` WHERE `
 $customers = DB::selectPairs('select `id`,`name` from `customers`  WHERE `tenant_id` = ?', $_SESSION['user']['tenant_id']);
 if ($_SERVER['REQUEST_METHOD']=='POST') {
 	$data = $_POST;
-	if (!isset($subscriptiontypes[$data['subscriptions']['subscriptiontype_id']])) $errors['subscriptions[subscription_id]']='Abonnementtype not found';
-	if (!isset($customers[$data['subscriptions']['customer_id']])) $errors['subscriptions[customer_id]']='Customer not found';
-	if (!isset($projects[$data['subscriptions']['project_id']])) $errors['subscriptions[project_id]']='projects not found';
+
+	if ($data['subscriptions']['add_customer']) {
+		$customer_id = DB::insert('INSERT INTO `customers` (`tenant_id`, `name`) VALUES (?, ?)', $_SESSION['user']['tenant_id'], $data['subscriptions']['add_customer']);
+		$customers = DB::selectPairs('select `id`,`name` from `customers`  WHERE `tenant_id` = ?', $_SESSION['user']['tenant_id']);
+	} else {
+		$customer_id = $data['subscriptions']['customer_id'];
+	}
+
+	if (!isset($customers[$customer_id])) $errors['subscriptions[customer_id]']='Customer not found';
+	if (!isset($data['subscriptions']['project_id']) || !$data['subscriptions']['project_id']) $data['subscriptions']['project_id'] = NULL;
+	if (!isset($data['subscriptions']['subscriptiontype_id']) || !$data['subscriptions']['subscriptiontype_id']) $data['subscriptions']['subscriptiontype_id'] = NULL;
+	
 	if (!isset($errors)) {
 		try {
 			$id = DB::insert('INSERT INTO `subscriptions` (
@@ -15,8 +24,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 				`vat_percentage`, 
 				`months`, 
 				`name`, 
-				`from`, 
-				`canceled`, 
+				`from`,
 				`comment`, 
 				`subscriptiontype_id`, 
 				`customer_id`, 
@@ -28,10 +36,9 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 				$data['subscriptions']['months'], 
 				$data['subscriptions']['name'], 
 				$data['subscriptions']['from'], 
-				$data['subscriptions']['canceled'], 
 				$data['subscriptions']['comment'], 
 				$data['subscriptions']['subscriptiontype_id'], 
-				$data['subscriptions']['customer_id'], 
+				$customer_id, 
 				$data['subscriptions']['project_id']
 			);
 			if ($id) {

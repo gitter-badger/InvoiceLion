@@ -19,7 +19,7 @@
       <td class="date"><span><?php e($row['hours']['date']);?></span></td>
       <td class="number"><span><?php e($row['hours']['hours_worked']);?></span></td>
       <td class="name"><span><?php e($row['hours']['name']);?></span></td>
-      <td class="text"><span><?php if(isset($row['hours']['customer_id'])) { ?><a href="projects/view/<?php e($row['hours']['customer_id']); ?>"><?php e($customers[$row['hours']['customer_id']]);?></a><?php } ?></span></td>
+      <td class="text"><span><?php if(isset($row['hours']['customer_id'])) { ?><a href="customers/view/<?php e($row['hours']['customer_id']); ?>"><?php e($customers[$row['hours']['customer_id']]);?></a><?php } ?></span></td>
       <td class="money"><span><?php if($row['hours']['subtotal']) e($row['hours']['subtotal']); else e('0'); ?></span></td>
     </tr>
     <?php endforeach; ?>

@@ -5,13 +5,21 @@ $hourtypes = DB::selectPairs('select `id`,`name` from `hourtypes` WHERE `tenant_
 if ($_SERVER['REQUEST_METHOD']=='POST') {
 	$data = $_POST;
 
-	if (!$data['hours']['project_id']) $data['hours']['project_id']=NULL;
-	if (!$data['hours']['comment']) $data['hours']['comment']=NULL;
-	if (!$data['hours']['type']) $data['hours']['type']=NULL;
-	if (!isset($data['hours']['date'])) $errors['hours[date]']='Date not set';	
+	if ($data['hours']['add_customer']) {
+		$customer_id = DB::insert('INSERT INTO `customers` (`tenant_id`, `name`) VALUES (?, ?)', $_SESSION['user']['tenant_id'], $data['hours']['add_customer']);
+		$customers = DB::selectPairs('select `id`,`name` from `customers`  WHERE `tenant_id` = ?', $_SESSION['user']['tenant_id']);
+	} else {
+		$customer_id = $data['hours']['customer_id'];
+	}
+
+	if (!isset($data['hours']['project_id']) || !$data['hours']['project_id']) $data['hours']['project_id']=NULL;
+	if (!isset($data['hours']['comment']) || $data['hours']['comment']) $data['hours']['comment']=NULL;
+	if (!isset($data['hours']['type']) || !$data['hours']['type']) $data['hours']['type']=NULL;
+	if (!isset($data['hours']['date']) || !$data['hours']['date']) $errors['hours[date]']='Date not set';	
+	if (!isset($customer_id) || !$customer_id) $errors['hours[customer_id]']='Customer not set';	
 	
 	//set vat_percentage to NULL if the customer has vat_reverse_charge
-	$vat_reverse_charge = DB::selectValue('select `vat_reverse_charge` from `customers` WHERE `tenant_id` = ? AND `id` = ?', $_SESSION['user']['tenant_id'], $data['hours']['customer_id']);
+	$vat_reverse_charge = DB::selectValue('select `vat_reverse_charge` from `customers` WHERE `tenant_id` = ? AND `id` = ?', $_SESSION['user']['tenant_id'], $customer_id);
 	if ($vat_reverse_charge) $data['hours']['vat_percentage']=NULL;
 	
 	if (!isset($errors)) {
@@ -30,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 				`total`
 			) VALUES (?, ?, ?, ?, ?, ?, ?)', 
 				$_SESSION['user']['tenant_id'], 
-				$data['hours']['customer_id'], 
+				$customer_id, 
 				$data['hours']['name'], 
 				$subtotal, 
 				($total - $subtotal),
@@ -53,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 				`invoiceline_id`
 			) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
 				$_SESSION['user']['tenant_id'],
-				$data['hours']['customer_id'], 
+				$customer_id, 
 				$data['hours']['project_id'], 
 				$data['hours']['date'], 
 				$data['hours']['name'], 
@@ -78,6 +86,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 } else {
 	$data = array('hours'=>array(
 		'customer_id'=>NULL, 
+		'add_customer'=>NULL, 
 		'project_id'=>NULL, 
 		'date'=>Date("Y-m-d"), 
 		'name'=>NULL, 
