@@ -4,7 +4,7 @@ $projects = DB::select('select `id`,`name`,`customer_id` from `projects` WHERE `
 $customers = DB::selectPairs('select `id`,`name` from `customers`  WHERE `tenant_id` = ?', $_SESSION['user']['tenant_id']);
 if ($_SERVER['REQUEST_METHOD']=='POST') {
 	$data = $_POST;
-	if (!isset($subscriptiontypes[$data['subscriptions']['subscriptiontype_id']])) $errors['subscriptions[subscriptiontype_id]']='Subscription type not found';
+	if (!isset($data['subscriptions']['subscriptiontype_id']) || !$data['subscriptions']['subscriptiontype_id']) $data['subscriptions']['subscriptiontype_id'] = NULL;
 	if (!isset($customers[$data['subscriptions']['customer_id']])) $errors['subscriptions[customer_id]']='Customer not found';
 	if (!isset($customers[$data['subscriptions']['project_id']])) $data['subscriptions']['project_id'] = NULL;
 	if (!isset($data['subscriptions']['canceled'])) $data['subscriptions']['canceled'] = NULL;
