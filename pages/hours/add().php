@@ -5,11 +5,11 @@ $hourtypes = DB::selectPairs('select `id`,`name` from `hourtypes` WHERE `tenant_
 if ($_SERVER['REQUEST_METHOD']=='POST') {
 	$data = $_POST;
 
-	if (!$data['hours']['project_id']) $data['hours']['project_id']=NULL;
-	if (!$data['hours']['comment']) $data['hours']['comment']=NULL;
-	if (!$data['hours']['type']) $data['hours']['type']=NULL;
-	if (!$data['hours']['date']) $errors['hours[date]']='Date not set';	
-	if (!$data['hours']['customer_id']) $errors['hours[customer_id]']='Customer not set';	
+	if (!isset($data['hours']['project_id'])) $data['hours']['project_id']=NULL;
+	if (!isset($data['hours']['comment'])) $data['hours']['comment']=NULL;
+	if (!isset($data['hours']['type'])) $data['hours']['type']=NULL;
+	if (!isset($data['hours']['date'])) $errors['hours[date]']='Date not set';	
+	if (!isset($data['hours']['customer_id'])) $errors['hours[customer_id]']='Customer not set';	
 	
 	//set vat_percentage to NULL if the customer has vat_reverse_charge
 	$vat_reverse_charge = DB::selectValue('select `vat_reverse_charge` from `customers` WHERE `tenant_id` = ? AND `id` = ?', $_SESSION['user']['tenant_id'], $data['hours']['customer_id']);
