@@ -1,7 +1,7 @@
 <?php Buffer::set('title','Invoices'); ?>
 <h2><a href="/">Home</a></h2>
 <h1>Invoices <a href="invoices/add" class="btn-primary">Add invoice</a></h1>
-<table class="table">
+<table class="table responsive-minimal">
   <thead>
     <tr>
       <th class="text <?php if($order=='number') e('selected'); ?>" order="/invoices/number/desc">Number</th>

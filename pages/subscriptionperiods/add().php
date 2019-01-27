@@ -5,6 +5,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 	$data = $_POST;
 	$subscription = DB::selectOne('select * from `subscriptions` WHERE `tenant_id` = ? and `id` = ?', $_SESSION['user']['tenant_id'], $data['subscriptionperiods']['subscription_id']);
 	if (!isset($subscriptions[$data['subscriptionperiods']['subscription_id']])) $errors['subscriptionperiods[subscription_id]']='subscriptions not found';
+	if (!isset($data['subscriptionperiods']['comment'])) $data['subscriptionperiods']['comment']=NULL;
 	if (!isset($invoices[$data['subscriptionperiods']['invoice_id']])) $data['subscriptionperiods']['invoice_id']=NULL;
 	if (!isset($errors)) {
 		try {

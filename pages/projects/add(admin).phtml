@@ -12,7 +12,7 @@
 	</div>
   
 	<div class="form-group <?php e(isset($errors['projects[customer_id]'])?'has-error':''); ?>">
-		<label class="control-label" for="projects[customer_id]">Customer</label>
+		<label class="control-label" for="projects[customer_id]">Customer <a onclick="this.parentNode.nextElementSibling.selectedIndex = 0; this.parentNode.parentNode.nextElementSibling.style.display = 'block'; this.parentNode.parentNode.style.display = 'none'; document.getElementById('projects[add_customer]').focus();">add</a></label>
 		<select class="form-control" name="projects[customer_id]" id="projects[customer_id]">
 			<option value=""<?php e(''==$data['projects']['customer_id']?' selected="selected"':''); ?>></option>
 			<?php foreach ($customers as $key => $value): ?>
@@ -20,6 +20,12 @@
 			<?php endforeach; ?>
 		</select>
 		<span class="help-block"><?php if (isset($errors['projects[customer_id]'])) e($errors['projects[customer_id]']); ?></span>
+	</div>
+
+	<div class="form-group <?php e(isset($errors['projects[add_customer]'])?'has-error':''); ?>" style="display: none;">
+		<label class="control-label" for="projects[add_customer]">Customer <a onclick="this.parentNode.nextElementSibling.value = ''; this.parentNode.parentNode.previousElementSibling.style.display = 'block'; this.parentNode.parentNode.style.display = 'none';">cancel</a></label>
+		<input class="form-control" name="projects[add_customer]" type="text" value="<?php e($data['projects']['add_customer']); ?>" id="projects[add_customer]" />
+		<span class="help-block"><?php if (isset($errors['projects[add_customer]'])) e($errors['projects[add_customer]']); ?></span>
 	</div>
   
 	<div class="form-group <?php e(isset($errors['projects[active]'])?'has-error':''); ?>">
