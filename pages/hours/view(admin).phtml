@@ -52,7 +52,7 @@
 	<?php if($hourtypes) { ?>
 	<dl>
 		<dt>Hour type</dt>
-  	<dd><?php if($data['hours']['type']) e($hourtypes[$data['hours']['type']]); else e('-');?></dd>
+  	<dd><?php if(isset($data['hours']['type']) && $hourtypes[$data['hours']['type']]) e($hourtypes[$data['hours']['type']]); else e('-');?></dd>
  	</dl>
 	<?php } ?>
 
