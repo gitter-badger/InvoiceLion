@@ -31,4 +31,5 @@ Point the `DocumentRoot` of Apache (or `root` of Nginx) to the `web` folder of t
 ## Support
 
 Please use the software, report bugs and ask for features using the [Github issues](https://github.com/Usecue/InvoiceLion/issues)!
+
 NB: No costs and no guarentees. Please be kind to each other and help each other out!
