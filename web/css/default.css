@@ -111,6 +111,9 @@ div + p {padding-top: 15px;}
 @media (max-width: 1200px) {
     .col50 {float: none; width: auto;}
     .col50 + .col50 {margin-left: 0%;}
+    .card {border: 0px solid rgba(0,0,0,0.05); border-radius: 0px; padding: 0px;}
+    .card tr th:first-child, .card tr td:first-child span {padding-left: 0px;}
+    .card tr th:last-child, .card tr td:last-child span {padding-right: 0px;}
 }
 
 
