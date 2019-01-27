@@ -9,7 +9,7 @@ We promise to never make a profit from this service, but we may ask for a (optio
 
 ## Download and install
 
-If you want to have full control over your invoicing system, then you can install this software on your own server.
+If you want to have full control over your invoicing system, then you can [download the latest release](https://github.com/Usecue/InvoiceLion/releases) of this software and install it on your own server.
 
 ## Requirements
 
