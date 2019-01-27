@@ -14,6 +14,12 @@
         </dd>
     </dl>
     <dl>
+        <dt>Subscriptions</dt>
+        <dd>        
+            <?php if($data['tenants']['subscriptions_active']) e('yes'); else e('no'); ?>
+        </dd>
+    </dl>
+    <dl>
         <dt>Company name</dt>
         <dd><?php e($data['tenants']['name']?:'-');?></dd>
     </dl>
