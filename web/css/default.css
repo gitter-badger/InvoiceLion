@@ -198,9 +198,23 @@ td span {
     text-overflow: ellipsis;
 }
 tr:last-child td {border-bottom: 0px solid rgba(0,0,0,0.05);}
-
-
-
+@media (max-width: 750px) {
+    table.responsive {position: relative;}
+    table.responsive, 
+    table.responsive thead, 
+    table.responsive tbody, 
+    table.responsive tr, 
+    table.responsive td, 
+    table.responsive th {text-align: left!important; border: 0; display: block; width: 100%!important;}
+    table.responsive td, table.responsive th {padding: 0;}
+    table.responsive tr {border-radius: 5px; border: 1px solid rgba(0,0,0,0.05); width: calc(100% - 22px)!important; margin-bottom: 10px; padding: 10px;}
+    table.responsive th {display: none;}
+    table.responsive th[order] {
+        display: inline-block !important;
+        width: auto !important;
+        margin-right: 5px;
+    }
+}
 
 
 .bool {text-align: center; width: 50px;}
