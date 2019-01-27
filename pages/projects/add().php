@@ -3,7 +3,7 @@ $customers = DB::selectPairs('select `id`,`name` from `customers` WHERE `tenant_
 if ($_SERVER['REQUEST_METHOD']=='POST') {
 	$data = $_POST;
 	
-	if ($data['projects']['add_customer']) {
+	if (isset($data['projects']['add_customer']) && $data['projects']['add_customer']) {
 		$customer_id = DB::insert('INSERT INTO `customers` (`tenant_id`, `name`) VALUES (?, ?)', $_SESSION['user']['tenant_id'], $data['projects']['add_customer']);
 		$customers = DB::selectPairs('select `id`,`name` from `customers`  WHERE `tenant_id` = ?', $_SESSION['user']['tenant_id']);
 	} else {
