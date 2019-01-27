@@ -31,7 +31,7 @@
 	</div>
 
 	<div class="form-group <?php e(isset($errors['subscriptions[add_customer]'])?'has-error':''); ?>" style="display: none;">
-		<label class="control-label" for="subscriptions[add_customer]">Add customer <a onclick="this.parentNode.previousElementSibling.value = ''; this.parentNode.parentNode.previousElementSibling.style.display = 'block'; this.parentNode.parentNode.style.display = 'none';">cancel</a></label>
+		<label class="control-label" for="subscriptions[add_customer]">Add customer <a onclick="this.parentNode.nextElementSibling.value = ''; this.parentNode.parentNode.previousElementSibling.style.display = 'block'; this.parentNode.parentNode.style.display = 'none';">cancel</a></label>
 		<input class="form-control" name="subscriptions[add_customer]" type="text" value="<?php e($data['subscriptions']['add_customer']); ?>" id="subscriptions[add_customer]" />
 		<span class="help-block"><?php if (isset($errors['subscriptions[add_customer]'])) e($errors['subscriptions[add_customer]']); ?></span>
 	</div>

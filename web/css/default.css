@@ -174,8 +174,10 @@ th[order] {cursor: pointer;}
 th.selected {text-decoration: underline;}
 .tag {text-decoration: none; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; display: inline-block; padding: 2px 7px; font-size: 85%; margin-right: 2px;}
 input[type="file"] { border:0; padding:0;}
-
-
+.form-group.has-error, .form-group.has-error a {color: red!important;}
+.form-group.has-error input,
+.form-group.has-error select,
+.form-group.has-error textarea {border: 1px solid red;}
 
 
 
