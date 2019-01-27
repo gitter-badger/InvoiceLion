@@ -32,7 +32,7 @@
           <a href="statistics"><span>Statistics</span></a><br />  
           <?php if($tenant['tenants']['hours_active']) {?><a href="hours"><span>Hours</span></a><br /><?php }?>
           <a href="deliveries"><span>Deliveries</span></a><br />
-          <a href="subscriptions"><span>Subscriptions</span></a><br />
+          <?php if($tenant['tenants']['subscriptions_active']) {?><a href="subscriptions"><span>Subscriptions</span></a><br /><?php }?>
           <a href="invoices"><span>Invoices</span></a><br />          
           <a href="customers"><span>Customers</span></a><br />
           <a href="projects"><span>Projects</span></a><br />
