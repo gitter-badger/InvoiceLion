@@ -9,10 +9,31 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 	if (!isset($invoices[$data['subscriptionperiods']['invoice_id']])) $data['subscriptionperiods']['invoice_id']=NULL;
 	if (!isset($errors)) {
 		try {
-			$subscriptionperiod_id = DB::insert('INSERT INTO `subscriptionperiods` (`tenant_id`, `from`, `name`, `invoice_id`, `subscription_id`, `comment`) VALUES (?, ?, ?, ?, ?, ?)', $_SESSION['user']['tenant_id'], $data['subscriptionperiods']['from'], $data['subscriptionperiods']['name'], $data['subscriptionperiods']['invoice_id'], $data['subscriptionperiods']['subscription_id'], $data['subscriptionperiods']['comment']);
+
+			$subtotal = $data['subscriptionperiods']['subtotal'];
+			if($data['subscriptionperiods']['vat_percentage']) $total = $subtotal*((100+$data['subscriptionperiods']['vat_percentage'])/100); 
+			else $total = $subtotal;
+
+			$invoiceline_id = DB::insert('INSERT INTO `invoicelines` (
+				`tenant_id`, 
+				`customer_id`, 
+				`name`, 
+				`subtotal`, 
+				`vat`,
+				`vat_percentage`,
+				`total`
+			) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+				$_SESSION['subscriptionperiods']['tenant_id'], 
+				$customer_id, 
+				$data['subscriptionperiods']['name'], 
+				$subtotal, 
+				($total - $subtotal),
+				$data['subscriptionperiods']['vat_percentage'],
+				$total
+			);
 			
-			$invoicelines_id = DB::insert('INSERT INTO `invoicelines` (`tenant_id`, `project_id`, `name`, `subtotal`, `hour_id`, `invoice_id`) VALUES (?, ?, ?, ?, ?, ?)', $_SESSION['user']['tenant_id'], $subscription['subscriptions']['project_id'], $data['subscriptionperiods']['name'], $subscription['subscriptions']['fee'], $subscriptionperiod_id, $data['subscriptionperiods']['invoice_id']);
-			
+			$subscriptionperiod_id = DB::insert('INSERT INTO `subscriptionperiods` (`tenant_id`, `from`, `name`, `invoice_id`, `subscription_id`, `comment`) VALUES (?, ?, ?, ?, ?, ?)', $_SESSION['user']['tenant_id'], $data['subscriptionperiods']['from'], $data['subscriptionperiods']['name'], $data['subscriptionperiods']['subscription_id'], $data['subscriptionperiods']['comment'],$invoiceline_id);
+
 			if ($subscriptionperiod_id) {
 				Flash::set('success','Subscription period saved');
 				Router::redirect('subscriptionperiods/index');
