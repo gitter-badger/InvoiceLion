@@ -6,7 +6,7 @@
   
 	<div class="form-group <?php e(isset($errors['subscriptionperiods[from]'])?'has-error':''); ?>">
 		<label class="control-label" for="subscriptionperiods[from]">From date</label>
-		<input class="form-control" name="subscriptionperiods[from]" type="text" value="<?php e($data['subscriptionperiods']['from']); ?>" id="subscriptionperiods[from]" />
+		<input class="form-control" name="subscriptionperiods[from]" type="date" value="<?php e($data['subscriptionperiods']['from']); ?>" id="subscriptionperiods[from]" />
 		<span class="help-block"><?php if (isset($errors['subscriptionperiods[from]'])) e($errors['subscriptionperiods[from]']); ?></span>
 	</div>
   
@@ -14,17 +14,6 @@
 		<label class="control-label" for="subscriptionperiods[name]">Name</label>
 		<input class="form-control" name="subscriptionperiods[name]" type="text" value="<?php e($data['subscriptionperiods']['name']); ?>" id="subscriptionperiods[name]" />
 		<span class="help-block"><?php if (isset($errors['subscriptionperiods[name]'])) e($errors['subscriptionperiods[name]']); ?></span>
-	</div>
-  
-	<div class="form-group <?php e(isset($errors['subscriptionperiods[invoice_id]'])?'has-error':''); ?>">
-		<label class="control-label" for="subscriptionperiods[invoice_id]">Invoice</label>
-		<select class="form-control" name="subscriptionperiods[invoice_id]" id="subscriptionperiods[invoice_id]">
-			<option value=""<?php e(''==$data['subscriptionperiods']['invoice_id']?' selected="selected"':''); ?>></option>
-			<?php foreach ($invoices as $key => $value): ?>
-			<option value="<?php e($key); ?>"<?php e($key==$data['subscriptionperiods']['invoice_id']?' selected="selected"':''); ?>><?php e($value); ?></option>
-			<?php endforeach; ?>
-		</select>
-		<span class="help-block"><?php if (isset($errors['subscriptionperiods[invoice_id]'])) e($errors['subscriptionperiods[invoice_id]']); ?></span>
 	</div>
   
 	<div class="form-group <?php e(isset($errors['subscriptionperiods[subscription_id]'])?'has-error':''); ?>">
@@ -39,9 +28,9 @@
 	</div>
   
 	<div class="form-group <?php e(isset($errors['subscriptionperiods[comment]'])?'has-error':''); ?>">
-		<label class="control-label" for="subscriptionperiods[comment]">Comment</label>
+		<label class="control-label" for="subscriptionperiods[comment]">Text</label>
 		<input class="form-control" name="subscriptionperiods[comment]" type="text" value="<?php e($data['subscriptionperiods']['comment']); ?>" id="subscriptionperiods[comment]" />
-		<span class="help-block"><?php if (isset($errors['subscriptionperiods[comment]'])) e($errors['subscriptionperiodscommentt]']); ?></span>
+		<span class="help-block"><?php if (isset($errors['subscriptionperiods[comment]'])) e($errors['subscriptionperiods[comment]']); ?></span>
 	</div>
 
 	<div class="form-group">
