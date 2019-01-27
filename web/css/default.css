@@ -61,6 +61,9 @@ h2 a {text-decoration: none;}
 .nav a:hover, .hover:hover, .hover:hover a {cursor: pointer; color: #18b663;}
 .pull-right {float: right;}
 h1 .btn-primary {font-size: 12px; line-height: 1.5em; margin-top: 5px; float: right; }
+@media (max-width: 800px) {
+    h1 .btn-primary {position: absolute; right: 20px; top: 15px;}
+}
 .inline-icon {height: 16px; display: inline-block;}
 pre {font-family: 'Roboto', sans-serif;}
 .alert {position: fixed; left: 0; width: 100%; background: #eee; font-weight: bold; z-index: 999;animation-name: slideOutTop; animation-duration: 3s; bottom: 100vh;}
