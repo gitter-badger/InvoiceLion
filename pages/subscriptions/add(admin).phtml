@@ -5,6 +5,7 @@
 <?php if (isset($error)): ?><div class="alert alert-danger"><button type="button" class="close">x</button><div><?php e($error); ?></div></div><?php endif; ?>
 <form method="post">
   
+	<?php if($projects) { ?>
 	<div class="form-group <?php e(isset($errors['subscriptions[project_id]'])?'has-error':''); ?>">
 		<label class="control-label" for="subscriptions[project_id]">Project</label>
 		<select class="form-control" name="subscriptions[project_id]" id="subscriptions[project_id]" onchange="document.getElementById('subscriptions[customer_id]').value = this.options[this.selectedIndex].getAttribute('customer-value');">
@@ -15,6 +16,7 @@
 		</select>
 		<span class="help-block"><?php if (isset($errors['subscriptions[project_id]'])) e($errors['subscriptions[project_id]']); ?></span>
 	</div>
+	<?php } ?>
 
 	<div class="form-group <?php e(isset($errors['subscriptions[customer_id]'])?'has-error':''); ?>">
 		<label class="control-label" for="subscriptions[customer_id]">Customer</label>

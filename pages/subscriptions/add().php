@@ -6,7 +6,6 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 	$data = $_POST;
 	if (!isset($subscriptiontypes[$data['subscriptions']['subscriptiontype_id']])) $errors['subscriptions[subscription_id]']='Abonnementtype not found';
 	if (!isset($customers[$data['subscriptions']['customer_id']])) $errors['subscriptions[customer_id]']='Customer not found';
-	if (!isset($projects[$data['subscriptions']['project_id']])) $errors['subscriptions[project_id]']='projects not found';
 	if (!isset($errors)) {
 		try {
 			$id = DB::insert('INSERT INTO `subscriptions` (
