@@ -49,10 +49,10 @@
   	<dd><?php $data['hours']['subtotal'] ? e($data['hours']['subtotal']) : e('-'); ?></dd>
   </dl>
 
-	<?php if(isset($hourtypes)) {?>
+	<?php if($hourtypes) { ?>
 	<dl>
 		<dt>Hour type</dt>
-  	<dd><?php if($hourtypes[$data['hours']['type']]) e($hourtypes[$data['hours']['type']]); else e('-');?></dd>
+  	<dd><?php if($data['hours']['type']) e($hourtypes[$data['hours']['type']]); else e('-');?></dd>
  	</dl>
 	<?php } ?>
 
