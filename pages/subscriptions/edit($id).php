@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 	if (!isset($data['subscriptions']['subscriptiontype_id']) || !$data['subscriptions']['subscriptiontype_id']) $data['subscriptions']['subscriptiontype_id'] = NULL;
 	if (!isset($customers[$data['subscriptions']['customer_id']])) $errors['subscriptions[customer_id]']='Customer not found';
 	if (!isset($customers[$data['subscriptions']['project_id']])) $data['subscriptions']['project_id'] = NULL;
-	if (!isset($data['subscriptions']['canceled']) || $data['subscriptions']['canceled']=='0000-00-00') $data['subscriptions']['canceled'] = NULL;
+	if (!isset($data['subscriptions']['canceled']) || !$data['subscriptions']['canceled']) $data['subscriptions']['canceled'] = NULL;
 	if (!isset($errors)) {
 		try {
 			$rowsAffected = DB::update('UPDATE `subscriptions` SET 
