@@ -167,7 +167,7 @@ label {
 label a {float: right; font-weight: 300;}
 table + p {padding-top: 30px;}
 .form-group {margin-bottom: 15px;}
-select {padding: 0 10px; width: calc(100% - 2px);}
+select {padding: 0 10px; height: 42px; width: calc(100% - 2px);}
 textarea {height: 200px; line-height: 1.5em; padding-top: 9px; padding-bottom: 9px;}
 input[type="checkbox"] {height: auto; width: auto; max-width: none;}
 th[order] {cursor: pointer;}
