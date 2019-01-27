@@ -10,10 +10,10 @@
 		<span class="help-block"><?php if (isset($errors['subscriptiontypes[name]'])) e($errors['subscriptiontypes[name]']); ?></span>
 	</div>
   
-	<div class="form-group <?php e(isset($errors['subscriptiontypes[text]'])?'has-error':''); ?>">
-		<label class="control-label" for="subscriptiontypes[text]">Text</label>
-		<input class="form-control" name="subscriptiontypes[text]" type="text" value="<?php e($data['subscriptiontypes']['comment']); ?>" id="subscriptiontypes[text]" />
-		<span class="help-block"><?php if (isset($errors['subscriptiontypes[text]'])) e($errors['subscriptiontypes[text]']); ?></span>
+	<div class="form-group <?php e(isset($errors['subscriptiontypes[comment]'])?'has-error':''); ?>">
+		<label class="control-label" for="subscriptiontypes[comment]">Text</label>
+		<input class="form-control" name="subscriptiontypes[comment]" type="text" value="<?php e($data['subscriptiontypes']['comment']); ?>" id="subscriptiontypes[comment]" />
+		<span class="help-block"><?php if (isset($errors['subscriptiontypes[comment]'])) e($errors['subscriptiontypes[comment]']); ?></span>
 	</div>
 
 	<div class="form-group">
