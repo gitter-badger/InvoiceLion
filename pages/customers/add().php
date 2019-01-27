@@ -2,6 +2,7 @@
 if ($_SERVER['REQUEST_METHOD']=='POST') {
 	$data = $_POST;
 	if (!isset($errors)) {
+		if(!$data['customers']['vat_reverse_charge']) $data['customers']['vat_reverse_charge'] = NULL;
 		try {
 			$id = DB::insert('INSERT INTO `customers` (`tenant_id`, `name`, `email`, `contact`, `address`, `vat_reverse_charge`) VALUES (?, ?, ?, ?, ?, ?)', $_SESSION['user']['tenant_id'], $data['customers']['name'], $data['customers']['email'], $data['customers']['contact'], $data['customers']['address'], $data['customers']['vat_reverse_charge']);
 			if ($id) {
