@@ -11,7 +11,7 @@ class SignUpTest extends TestCase
         $link = $crawler->selectLink('Register')->link();
         $crawler = $client->click($link);
         $form = $crawler->selectButton('Submit')->form();
-        $crawler = $client->submit($form, array('username' => 'maurits8@vdschee.nl'));
+        $crawler = $client->submit($form, array('username' => 'maurits@vdschee.nl'));
         $nodes = $crawler->filter('.alert');
         $nodes->each(function ($node) {
             $this->assertEquals('', $node->text(), 'Validation error occurred');
