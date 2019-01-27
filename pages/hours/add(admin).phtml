@@ -57,7 +57,7 @@
 		<span class="help-block"><?php if (isset($errors['hours[name]'])) e($errors['hours[name]']); ?></span>
 	</div>
 
-	<?php if(isset($hourtypes)) { ?>
+	<?php if($hourtypes) { ?>
 	<div class="form-group <?php e(isset($errors['hours[type]'])?'has-error':''); ?>">
 		<label class="control-label" for="hours[type]">Hour type</label>
 		<select class="form-control" name="hours[type]" id="hours[type]">
