@@ -6,6 +6,7 @@
 
 <p>Last year you received &euro; <?php e(round($incomeLastYear)); ?>. Note that all these amounts are without VAT.</p>
 
+<?php if($sumhourspertype_thisyear) { ?>
 <div class="card col50">
 <table>
     <tr>
@@ -20,7 +21,9 @@
     <?php endforeach; ?>
 </table>
 </div>
+<?php } ?>
 
+<?php if($sumhourspertype_lastyear) { ?>
 <div class="card col50">
 <table>
     <tr>
@@ -35,3 +38,4 @@
     <?php endforeach; ?>
 </table>
 </div>
+<?php } ?>
