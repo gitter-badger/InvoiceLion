@@ -1,6 +1,8 @@
 <?php 
 $subscriptions = DB::selectPairs('select `id`,`name` from `subscriptions` WHERE `tenant_id` = ? order by name', $_SESSION['user']['tenant_id']);
 $invoices = DB::selectPairs('select `id`,`name` from `invoices` WHERE not `sent` AND `tenant_id` = ? order by number desc', $_SESSION['user']['tenant_id']);
+$customers = DB::selectPairs('select `id`,`name` from `customers` WHERE `tenant_id` = ? ORDER BY name', $_SESSION['user']['tenant_id']);
+
 if ($_SERVER['REQUEST_METHOD']=='POST') {
 	$data = $_POST;
 	$subscription = DB::selectOne('select * from `subscriptions` WHERE `tenant_id` = ? and `id` = ?', $_SESSION['user']['tenant_id'], $data['subscriptionperiods']['subscription_id']);
@@ -23,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 				`vat_percentage`,
 				`total`
 			) VALUES (?, ?, ?, ?, ?, ?, ?)', 
-				$_SESSION['subscriptionperiods']['tenant_id'], 
-				$customer_id, 
+				$_SESSION['user']['tenant_id'], 
+				$subscription['subscriptions']['customer_id'], 
 				$data['subscriptionperiods']['name'], 
 				$subtotal, 
 				($total - $subtotal),
