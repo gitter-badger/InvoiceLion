@@ -20,11 +20,9 @@
 		<label class="control-label" for="hours[customer_id]">Customer <a onclick="this.parentNode.nextElementSibling.selectedIndex = 0; this.parentNode.parentNode.nextElementSibling.style.display = 'block'; this.parentNode.parentNode.style.display = 'none';">add</a></label>
 		<select class="form-control" name="hours[customer_id]" id="hours[customer_id]">
 			<option value=""<?php e(''==$data['hours']['customer_id']?' selected="selected"':''); ?>></option>
-			<?php if($customers) {
-				foreach ($customers as $key => $value): ?>
-					<option value="<?php e($key); ?>"<?php e($key==$data['hours']['customer_id']?' selected="selected"':''); ?>><?php e($value); ?></option>
-				<?php endforeach; 
-			} ?>
+			<?php foreach ($customers as $key => $value): ?>
+			<option value="<?php e($key); ?>"<?php e($key==$data['hours']['customer_id']?' selected="selected"':''); ?>><?php e($value); ?></option>
+			<?php endforeach; ?>
 		</select>
 		<span class="help-block"><?php if (isset($errors['hours[customer_id]'])) e($errors['hours[customer_id]']); ?></span>
 	</div>

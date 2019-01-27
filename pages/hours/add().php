@@ -86,6 +86,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 } else {
 	$data = array('hours'=>array(
 		'customer_id'=>NULL, 
+		'add_customer'=>NULL, 
 		'project_id'=>NULL, 
 		'date'=>Date("Y-m-d"), 
 		'name'=>NULL, 
