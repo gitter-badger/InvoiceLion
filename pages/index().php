@@ -1,5 +1,5 @@
 <?php
-$invoicelines_no_invoices = DB::select('SELECT * FROM `invoicelines` WHERE `tenant_id` = ? AND (invoice_id IS NULL or invoice_id=0)', $_SESSION['user']['tenant_id']);
+$invoicelines_no_invoices = DB::select('SELECT * FROM `invoicelines` WHERE `tenant_id` = ? AND (invoice_id IS NULL or invoice_id=0) AND total <> 0', $_SESSION['user']['tenant_id']);
 
 $unpaid_invoices = DB::select('SELECT * FROM invoices WHERE `tenant_id` = ? AND (sent and (paid IS NULL or paid=0)) ORDER BY name', $_SESSION['user']['tenant_id']);
 
