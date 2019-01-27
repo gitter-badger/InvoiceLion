@@ -2,7 +2,7 @@
 
 InvoiceLion is free invoicing software for entrepreneurs.
 
-## As a service (on InvoiceLion.com)
+## InvoiceLion.com
 
 We run a production instance of this software on [InvoiceLion.com](https://www.invoicelion.com) and you can use it for FREE.
 We promise to never make a profit from this service, but we may ask for a (optional) donation in order to pay for our servers.
