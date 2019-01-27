@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 	if (!isset($errors)) {
 		try {
 
-			$subtotal = $data['subscriptionperiods']['subtotal'];
+			$subtotal = $subscription['subscriptions']['fee'];
 			if($data['subscriptionperiods']['vat_percentage']) $total = $subtotal*((100+$data['subscriptionperiods']['vat_percentage'])/100); 
 			else $total = $subtotal;
 
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 				$total
 			);
 			
-			$subscriptionperiod_id = DB::insert('INSERT INTO `subscriptionperiods` (`tenant_id`, `from`, `name`, `invoice_id`, `subscription_id`, `comment`) VALUES (?, ?, ?, ?, ?, ?)', $_SESSION['user']['tenant_id'], $data['subscriptionperiods']['from'], $data['subscriptionperiods']['name'], $data['subscriptionperiods']['subscription_id'], $data['subscriptionperiods']['comment'],$invoiceline_id);
+			$subscriptionperiod_id = DB::insert('INSERT INTO `subscriptionperiods` (`tenant_id`, `from`, `name`, `subscription_id`, `comment`,`invoiceline_id`) VALUES (?, ?, ?, ?, ?, ?)', $_SESSION['user']['tenant_id'], $data['subscriptionperiods']['from'], $data['subscriptionperiods']['name'], $data['subscriptionperiods']['subscription_id'], $data['subscriptionperiods']['comment'],$invoiceline_id);
 
 			if ($subscriptionperiod_id) {
 				Flash::set('success','Subscription period saved');

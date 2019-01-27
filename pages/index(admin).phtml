@@ -58,7 +58,7 @@
                     <th class="money"></th>
                 </tr>
                 <?php foreach ($periods_no_invoices as $row): ?>
-                    <tr class="hover" onclick="window.location.href='subscriptionperiods/view/<?php e($row['subscriptionperiods']['id']);?>';">
+                    <tr class="hover" onclick="window.location.href='invoicelines/view/<?php e($row['subscriptionperiods']['invoiceline_id']);?>';">
                         <td class="name"><span><?php e($row['subscriptionperiods']['name']); ?></span></td>
                         <td class="money"><span><?php e($row['subscriptions']['fee']); ?></span></td>
                     </tr>

@@ -6,18 +6,10 @@
 	<dl>
 		<dt>From date</dt>
   		<dd><?php e($data['subscriptionperiods']['from']);?></dd>
- 
-  	</dl>
+	</dl>
 	<dl>
-		<dt>Invoice</dt>
-  		<dd>
-		  	<?php if(isset($invoices[$data['subscriptionperiods']['invoice_id']])) {?>
-		  		<?php e($invoices[$data['subscriptionperiods']['invoice_id']]);?>
-		  	<?php } else {?>
-				-
-			<?php } ?>
-		</dd>
-		  
+		<dt>Until date</dt>
+  		<dd><?php e($data['subscriptionperiods']['until']);?></dd>
   	</dl>
 	<dl>
 		<dt>Subscription</dt>
@@ -26,13 +18,14 @@
 		  	<a href="/subscriptions/view/<?php e($data['subscriptionperiods']['subscription_id']); ?>"><?php e($subscriptions[$data['subscriptionperiods']['subscription_id']]);?></a>
 		  <?php } else { ?>
 			-
-		  <?php } ?></dd>
+		  <?php } ?>
+		</dd>
   	</dl>
-	<?php if($data['subscriptionperiods']['comment']) { ?><dl>
+
+	  <?php if($data['subscriptionperiods']['comment']) { ?><dl>
 		<dt>Comment</dt>
   		<dd><?php e($data['subscriptionperiods']['comment']);?></dd>
- 
-	</dl><?php } ?>
+ 	</dl><?php } ?>
 </div>
 <p>
 	<div class="pull-right">

@@ -10,7 +10,7 @@
   </thead>
   <tbody>
     <?php foreach ($data as $row): ?>
-    <tr>
+    <tr class="hover" onclick="window.location.href='subscriptionperiods/view/<?php e($row['subscriptionperiods']['id']);?>';">
       <td class="date"><span><?php e($row['subscriptionperiods']['from']);?></span></td>
       <td class="name"><span><?php e($row['subscriptionperiods']['name']);?></span></td>
       <td><span><?php if(isset($row['subscriptionperiods']['invoice_id'])) { ?><a href="invoices/view/<?php e($row['subscriptionperiods']['invoice_id']);?>"><?php e($invoices[$row['subscriptionperiods']['invoice_id']]);?></a><?php } ?></span></td>
