@@ -198,6 +198,8 @@ td span {
     text-overflow: ellipsis;
 }
 tr:last-child td {border-bottom: 0px solid rgba(0,0,0,0.05);}
+
+
 @media (max-width: 750px) {
     table.responsive {position: relative;}
     table.responsive, 
@@ -214,6 +216,13 @@ tr:last-child td {border-bottom: 0px solid rgba(0,0,0,0.05);}
         width: auto !important;
         margin-right: 5px;
     }
+}
+
+@media (max-width: 750px) {
+    table.responsive-minimal td, table.responsive-minimal th {display: none;}
+    table.responsive-minimal td:first-child, table.responsive-minimal th:first-child,
+    table.responsive-minimal td:last-child, table.responsive-minimal th:last-child,
+    table.responsive-minimal .name {display: table-cell;}
 }
 
 
