@@ -61,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 		'comment'=>NULL, 
 		'subscriptiontype_id'=>NULL, 
 		'customer_id'=>NULL, 
+		'add_customer'=>NULL,
 		'project_id'=>NULL
 	));
 }

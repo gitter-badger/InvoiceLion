@@ -26,5 +26,5 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 		}
 	}
 } else {
-	$data = array('projects'=>array('name'=>NULL, 'customer_id'=>NULL, 'active'=>NULL));
+	$data = array('projects'=>array('name'=>NULL, 'customer_id'=>NULL, 'add_customer'=>NULL, 'active'=>NULL));
 }
