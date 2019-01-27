@@ -17,7 +17,7 @@
 	</div>
 
 	<div class="form-group <?php e(isset($errors['hours[customer_id]'])?'has-error':''); ?>">
-		<label class="control-label" for="hours[customer_id]">Customer</label>
+		<label class="control-label" for="hours[customer_id]">Customer <a onclick="this.parentNode.nextElementSibling.selectedIndex = 0; this.parentNode.parentNode.nextElementSibling.style.display = 'block'; this.parentNode.parentNode.style.display = 'none';">add</a></label>
 		<select class="form-control" name="hours[customer_id]" id="hours[customer_id]">
 			<option value=""<?php e(''==$data['hours']['customer_id']?' selected="selected"':''); ?>></option>
 			<?php foreach ($customers as $key => $value): ?>
@@ -25,6 +25,12 @@
 			<?php endforeach; ?>
 		</select>
 		<span class="help-block"><?php if (isset($errors['hours[customer_id]'])) e($errors['hours[customer_id]']); ?></span>
+	</div>
+
+	<div class="form-group <?php e(isset($errors['hours[add_customer]'])?'has-error':''); ?>" style="display: none;">
+		<label class="control-label" for="hours[add_customer]">Add customer <a onclick="this.parentNode.previousElementSibling.value = ''; this.parentNode.parentNode.previousElementSibling.style.display = 'block'; this.parentNode.parentNode.style.display = 'none';">cancel</a></label>
+		<input class="form-control" name="hours[add_customer]" type="text" value="<?php e($data['hours']['add_customer']); ?>" id="hours[add_customer]" />
+		<span class="help-block"><?php if (isset($errors['hours[add_customer]'])) e($errors['hours[add_customer]']); ?></span>
 	</div>
 
 	<div class="form-group <?php e(isset($errors['hours[date]'])?'has-error':''); ?>">
