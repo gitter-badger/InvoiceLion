@@ -70,7 +70,8 @@
 		<textarea class="form-control" name="subscriptions[comment]" type="text" id="subscriptionscommentt]"><?php e($data['subscriptions']['comment']); ?></textarea>
 		<span class="help-block"><?php if (isset($errors['subscriptions[comment]'])) e($errors['subscriptions[comment]']); ?></span>
 	</div>
-  
+
+	<?php if($subscriptiontypes) { ?>
 	<div class="form-group <?php e(isset($errors['subscriptions[subscriptiontype_id]'])?'has-error':''); ?>">
 		<label class="control-label" for="subscriptions[subscriptiontype_id]">Subscription type</label>
 		<select class="form-control" name="subscriptions[subscriptiontype_id]" id="subscriptions[subscriptiontype_id]">
@@ -81,6 +82,7 @@
 		</select>
 		<span class="help-block"><?php if (isset($errors['subscriptions[subscriptiontype_id]'])) e($errors['subscriptions[subscriptiontype_id]']); ?></span>
 	</div>
+	<?php } ?>
 
 	<div class="form-group">
 		<button class="btn btn-primary" type="submit">Save</button>
