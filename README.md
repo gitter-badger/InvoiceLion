@@ -1,5 +1,7 @@
 # <img src="./web/img/invoicelion_icon.png" alt="logo" height="48" /> InvoiceLion
 
+[![Join the chat at https://gitter.im/Usecue/InvoiceLion](https://badges.gitter.im/Usecue/InvoiceLion.svg)](https://gitter.im/Usecue/InvoiceLion?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 InvoiceLion is free invoicing software for entrepreneurs.
 
 ## InvoiceLion.com
