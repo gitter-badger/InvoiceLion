@@ -8,11 +8,15 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 	if ($data['subscriptions']['add_customer']) {
 		$customer_id = DB::insert('INSERT INTO `customers` (`tenant_id`, `name`) VALUES (?, ?)', $_SESSION['user']['tenant_id'], $data['subscriptions']['add_customer']);
 		$customers = DB::selectPairs('select `id`,`name` from `customers`  WHERE `tenant_id` = ?', $_SESSION['user']['tenant_id']);
+		$customer_added = true;
 	} else {
 		$customer_id = $data['subscriptions']['customer_id'];
 	}
 
 	if (!isset($customers[$customer_id])) $errors['subscriptions[customer_id]']='Customer not found';
+	if (!isset($data['subscriptions']['from']) || !$data['subscriptions']['from']) $errors['subscriptions[from]']='Date not set';
+	if (!isset($data['subscriptions']['name']) || !$data['subscriptions']['name']) $errors['subscriptions[name]']='Name not set';
+	if (!isset($data['subscriptions']['fee']) || !$data['subscriptions']['fee']) $errors['subscriptions[fee]']='Fee not set';
 	if (!isset($data['subscriptions']['project_id']) || !$data['subscriptions']['project_id']) $data['subscriptions']['project_id'] = NULL;
 	if (!isset($data['subscriptions']['subscriptiontype_id']) || !$data['subscriptions']['subscriptiontype_id']) $data['subscriptions']['subscriptiontype_id'] = NULL;
 	
@@ -50,6 +54,10 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 			$error = 'Subscription not saved: '.$e->getMessage();
 		}
 	}	
+	if($customer_added == true) {
+		//try to remove the created customer - no error handling
+		$rows = DB::delete('DELETE FROM `customers` WHERE `tenant_id` = ? AND `id` = ?', $_SESSION['user']['tenant_id'], $customer_id);
+	}
 } else {
 	$data = array('subscriptions'=>array(
 		'fee'=>NULL, 
