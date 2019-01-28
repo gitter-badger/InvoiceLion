@@ -1,0 +1,23 @@
+<?php Buffer::set('title','Invoicelines'); ?>
+<h2><a href="/">Home</a></h2>
+<h1>Invoicelines</h1>
+<table class="table responsive-minimal">
+  <thead>
+    <tr>
+      <th class="name <?php if($order=='name') e('selected'); ?>" order="/invoicelines/name/asc">Name</th>
+      <th class="text <?php if($order=='customer_id') e('selected'); ?>" order="/invoicelines/customer_id/asc">Customer</th>
+      <th class="text <?php if($order=='invoice_id') e('selected'); ?>" order="/invoicelines/invoice_id/asc">Invoice</th>
+      <th class="money <?php if($order=='subtotal') e('selected'); ?>" order="/invoicelines/subtotal/desc">Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($data as $row): ?>
+    <tr class="hover" onclick="window.location.href='invoicelines/view/<?php e($row['invoicelines']['id']);?>';">
+      <td class="name"><span><?php e($row['invoicelines']['name']);?></span></td>
+      <td class="text"><span><?php if(isset($row['invoicelines']['customer_id'])) { ?><a href="customers/view/<?php e($row['invoicelines']['customer_id']); ?>"><?php e($customers[$row['invoicelines']['customer_id']]);?></a><?php } ?></span></td>
+      <td class="text"><span><?php if(isset($row['invoicelines']['invoice_id'])) { ?><a href="invoices/view/<?php e($row['invoicelines']['invoice_id']); ?>"><?php e($invoices[$row['invoicelines']['invoice_id']]);?></a><?php } ?></span></td>
+      <td class="money"><span><?php if($row['invoicelines']['subtotal']) e($row['invoicelines']['subtotal']); else e('0'); ?></span></td>
+    </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
